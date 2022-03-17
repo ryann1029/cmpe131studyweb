@@ -1,0 +1,38 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body
+{
+    font-family: sans-serif;
+}
+
+.menu-bar
+{
+    background: rgb(98, 50.2, 44.7);
+    text-align: center;
+}
+
+.menu-bar ul
+{
+    display: inline-flex;
+    list-style: none;
+    color: #fff;
+}
+
+.menu-bar li
+{
+    width: 120px;
+    padding: 15px;
+    margin: 15px;
+}
+
+.menu-bar ul li a
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+
