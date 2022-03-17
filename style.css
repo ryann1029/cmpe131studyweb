@@ -35,4 +35,10 @@ body
     color: #fff;
 }
 
+.active, .menu-bar ul li:hover
+{
+    background:#800020;
+    border-radius: 3px;
+}
+
 
