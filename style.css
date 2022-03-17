@@ -1,42 +1,35 @@
-*
-{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body
-{
+body {
     font-family: sans-serif;
 }
 
-.menu-bar
-{
+.menu-bar {
     background: rgb(0, 0, 0);
     text-align: center;
 }
 
-.menu-bar ul
-{
+.menu-bar ul {
     display: inline-flex;
     list-style: none;
     color: #fff;
 }
 
-.menu-bar li
-{
+.menu-bar li {
     width: 120px;
     padding: 15px;
     margin: 15px;
 }
 
-.menu-bar ul li a
-{
+.menu-bar ul li a {
     text-decoration: none;
     color: #fff;
 }
 
-.active, .menu-bar ul li:hover
-{
+.active, .menu-bar ul li:hover {
     background:#800020;
     border-radius: 3px;
 }
