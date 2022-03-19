@@ -20,8 +20,8 @@ TABLE OF CONTENTS
 
 :root {
     --font-family-default: "Rubik", "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", helvetica, arial, sans-serif;
-    --normal-font-color: rgb(0, 0, 0);
-    --background-color-default-rgb: 195, 238, 252;
+    --normal-font-color: rgb(255, 255, 255);
+    --background-color-default-rgb: 51, 51, 51;
     --logo-height: 50px;
 }
 
@@ -32,7 +32,7 @@ html, html * {
 }
 
 body {
-    background: url("https://i.pinimg.com/736x/48/ba/42/48ba4280002826bad53baeedae59e9c3.jpg");
+    background: url("https://images.pexels.com/photos/1036808/pexels-photo-1036808.jpeg");
     background-size: cover;
 }
 
