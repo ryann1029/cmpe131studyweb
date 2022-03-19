@@ -96,13 +96,15 @@ body {
         transition: 0.1s;
     }
 
+    /* Light Gray Hover effect on the nevigation */
     .navbar-light ul > li > a:hover {
-        opacity: 0.5;
+        /* opacity: 0.5; */
+        background-color: #555;
     }
 
     /* Custom background-color for navigation background color */
     .bg-custom {
-        background-color: rgba(var(--background-color-default-rgb), 0.7);
+        background-color: rgba(var(--background-color-default-rgb), .95);
     }
 
     /* Fully hide mobile navigation bar on desktop view */
