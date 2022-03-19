@@ -69,6 +69,7 @@ body {
         height: var(--logo-height);
     }
 
+    /* External link hover transition */
     a {
         transition: 0.3s;
     }
@@ -77,15 +78,18 @@ body {
         color:#4c9ae4;
     }
 
-    a[aria-disabled="true"] {
-        opacity: 0.3;
-        cursor: help;
+    /* For disabled links or text */
+    .disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 
+    /* Text of navigation links are forced specified color */
     .nav-link {
         color: var(--normal-font-color) !important;
     }
 
+    /* Custom background-color for navigation background color */
     .bg-custom {
         background-color: rgba(var(--background-color-default-rgb), 0.7);
     }
