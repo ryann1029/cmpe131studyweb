@@ -22,6 +22,7 @@ TABLE OF CONTENTS
     --font-family-default: "Rubik", "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", helvetica, arial, sans-serif;
     --normal-font-color: rgb(0, 0, 0);
     --background-color-default-rgb: 195, 238, 252;
+    --logo-height: 50px;
 }
 
 /* Applied for all views (e.g., desktop, tablet, and mobile */
@@ -63,8 +64,9 @@ body {
         display: none;
     }
 
+    /* Logo height set */
     .logo {
-        height: 50px;
+        height: var(--logo-height);
     }
 
     a {
@@ -87,6 +89,12 @@ body {
     .bg-custom {
         background-color: rgba(var(--background-color-default-rgb), 0.7);
     }
+
+    /* Fully hide mobile navigation bar on desktop view */
+    .slicknav_menu {
+        display: none !important;
+    }
+
 }
 
 
@@ -108,10 +116,6 @@ body {
 
     header {
         padding: 15px;
-    }
-
-    .slicknav_menu {
-        display: none;
     }
 
     .style-nav ul {
@@ -139,7 +143,7 @@ body {
 
 
 /**************** 3a) SPECIFIC TABLET VIEW CONFIGURATIONS ****************/
-/* only show specific tablet configurations when scrreen width is between 600 pixels to 1024 pixels */
+/* only show specific tablet configurations when screen width is between 600 pixels to 1024 pixels */
 @media screen and (min-width: 600px) and (max-width: 1024px) {
 
     .style-nav ul li {
@@ -149,6 +153,11 @@ body {
     .style-nav ul {
         text-align: center;
     }
+
+    /* Fully hide mobile navigation bar on tablet view */
+    .slicknav_menu {
+        display: none !important;
+    }
 }
 
 
@@ -157,7 +166,7 @@ body {
 
 
 /**************** 3b) SPECIFIC MOBILE VIEW CONFIGURATIONS ****************/
-/* only show specific tablet configurations when scrreen width is under 600 pixels */
+/* only show specific tablet configurations when screen width is under 600 pixels */
 @media screen and (max-width: 600px) {
     .style-nav ul li {
         text-align: center;
