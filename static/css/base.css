@@ -1,42 +1,69 @@
+/*
+TABLE OF CONTENTS
+********************************
+1) STARTUP - ROOT/VARIABLES
+2) DESKTOP VIEW
+3) TABLET/MOBILE DEFAULT SETTINGS
+    3a) SPECIFIC TABLET VIEW CONFIGURATIONS
+    3b) SPECIFIC MOBILE VIEW CONFIGURATIONS
+4) WEBKIT ANIMATION
+********************************
+*/
+
+
+
+
+
+
+/**************** 1) STARTUP - ROOT/VARIABLES ****************/
 @charset "UTF-8";
 
 :root {
-    --font-family-default: helvetica, arial, sans-serif;
-    --normal-font: rgb(0, 0, 0);
+    --font-family-default: "Rubik", "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", helvetica, arial, sans-serif;
+    --normal-font-color: rgb(0, 0, 0);
     --background-color-default-rgb: 195, 238, 252;
 }
 
-/******* DESKTOP VIEW *******/
+/* Applied for all views (e.g., desktop, tablet, and mobile */
+html, html * {
+    box-sizing: border-box;
+    font-family: var(--font-family-default);
+}
+
+body {
+    background: url("https://i.pinimg.com/736x/48/ba/42/48ba4280002826bad53baeedae59e9c3.jpg");
+    background-size: cover;
+}
+
+/* Main Content (so it does not become all the way to the edge of the page...) */
+.main__page {
+    background-color: #FFFFFF90; /* #RRGGBBOO, where R=red, g=green, B=blue, O=opacity*/
+    padding: 24px 36px; /* veritical | horizontal */
+    margin: 1em 4em 1em 4em; /* top | right | bottom |left */
+    min-height: 100px;
+    overflow: hidden;
+}
+
+
+
+
+
+
+/**************** 2) DESKTOP VIEW ****************/
+/* only enables this CSS code block whenever the width of the screen is greater than 1024 pixels */
 @media screen and (min-width: 1024px) {
+    /* ".desktop" and ".mobile" are used to control viewing desktop and tablet/mobile designs */
+    /* "display: unset" means display */
+    /* "display: none" means do not show */
+
     .desktop {
         display: unset;
     }
-    
     .mobile {
         display: none;
     }
 
-    * {
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: var(--font-family-default);
-        background: url("https://i.pinimg.com/736x/48/ba/42/48ba4280002826bad53baeedae59e9c3.jpg");
-        background-size: cover;
-    }
-
-    .main__page {
-        background-color: #FFFFFF90; /* #RRGGBBOO, where R=red, g=green, B=blue, O=opacity*/
-        padding: 24px 36px; /* veritical | horizontal */
-        margin: 1em 4em 1em 4em; /* top | right | bottom |left */
-        min-height: 100px;
-        overflow: hidden;
-    }
-
     .logo {
-        background: "static\pictures\spare-space-logo.png";
         height: 50px;
     }
 
@@ -48,17 +75,17 @@
         color:#4c9ae4;
     }
 
-    .bg-custom {
-        background-color: rgba(var(--background-color-default-rgb), 0.7);
+    a[aria-disabled="true"] {
+        opacity: 0.3;
+        cursor: help;
     }
 
     .nav-link {
-        color: var(--normal-font) !important;
+        color: var(--normal-font-color) !important;
     }
 
-    .disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
+    .bg-custom {
+        background-color: rgba(var(--background-color-default-rgb), 0.7);
     }
 }
 
@@ -66,22 +93,19 @@
 
 
 
-/******* MOBILE/TABLET VIEW *******/
+
+/**************** 3) TABLET/MOBILE DEFAULT SETTINGS ****************/
 @media screen and (max-width: 1024px) {
+    /* ".desktop" and ".mobile" are used to control viewing desktop and tablet/mobile designs */
+    /* "display: unset" means display */
+    /* "display: none" means do not show */
     .desktop {
         display: none;
     }
-
     .mobile {
         display: unset;
     }
 
-    html, html * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
-    }
     header {
         padding: 15px;
     }
@@ -114,8 +138,8 @@
 
 
 
-
-/******* TABLET VIEW *******/
+/**************** 3a) SPECIFIC TABLET VIEW CONFIGURATIONS ****************/
+/* only show specific tablet configurations when scrreen width is between 600 pixels to 1024 pixels */
 @media screen and (min-width: 600px) and (max-width: 1024px) {
 
     .style-nav ul li {
@@ -132,7 +156,8 @@
 
 
 
-/******* MOBILE VIEW *******/
+/**************** 3b) SPECIFIC MOBILE VIEW CONFIGURATIONS ****************/
+/* only show specific tablet configurations when scrreen width is under 600 pixels */
 @media screen and (max-width: 600px) {
     .style-nav ul li {
         text-align: center;
@@ -149,7 +174,11 @@
 
 
 
-/* ANIMATION */
+
+
+
+/**************** 4) WEBKIT ANIMATION ****************/
+/* Creates Rainbow animcation text - from red to orange... to purple, and repeat. */
 .rainbow {
     animation: RainbowName 3s infinite;
     color: red !important;
