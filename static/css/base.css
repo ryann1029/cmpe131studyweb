@@ -1,0 +1,168 @@
+@charset "UTF-8";
+
+:root {
+    --font-family-default: helvetica, arial, sans-serif;
+    --normal-font: rgb(0, 0, 0);
+    --background-color-default-rgb: 195, 238, 252;
+}
+
+/******* DESKTOP VIEW *******/
+@media screen and (min-width: 1024px) {
+    .desktop {
+        display: unset;
+    }
+    
+    .mobile {
+        display: none;
+    }
+
+    * {
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: var(--font-family-default);
+        background: url("https://i.pinimg.com/736x/48/ba/42/48ba4280002826bad53baeedae59e9c3.jpg");
+        background-size: cover;
+    }
+
+    .main__page {
+        background-color: #FFFFFF90; /* #RRGGBBOO, where R=red, g=green, B=blue, O=opacity*/
+        padding: 24px 36px; /* veritical | horizontal */
+        margin: 1em 4em 1em 4em; /* top | right | bottom |left */
+        min-height: 100px;
+        overflow: hidden;
+    }
+
+    .logo {
+        background: "static\pictures\spare-space-logo.png";
+        height: 50px;
+    }
+
+    a {
+        transition: 0.3s;
+    }
+
+    a:hover{
+        color:#4c9ae4;
+    }
+
+    .bg-custom {
+        background-color: rgba(var(--background-color-default-rgb), 0.7);
+    }
+
+    .nav-link {
+        color: var(--normal-font) !important;
+    }
+
+    .disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+}
+
+
+
+
+
+/******* MOBILE/TABLET VIEW *******/
+@media screen and (max-width: 1024px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: unset;
+    }
+
+    html, html * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+    }
+    header {
+        padding: 15px;
+    }
+
+    .slicknav_menu {
+        display: none;
+    }
+
+    .style-nav ul {
+        background-color: #333;
+        list-style-type: none;
+    }
+
+    .style-nav ul li a {
+        text-decoration: none;
+        color: white;
+        display: block;
+        text-align: end;
+        text-transform: uppercase;
+        padding: 8px;
+    }
+
+    .style-nav ul li:hover {
+        background-color: #555;
+    }
+}
+
+
+
+
+
+
+
+/******* TABLET VIEW *******/
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+
+    .style-nav ul li {
+        display: inline-block;
+    }
+    
+    .style-nav ul {
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+/******* MOBILE VIEW *******/
+@media screen and (max-width: 600px) {
+    .style-nav ul li {
+        text-align: center;
+    }
+    
+    .slicknav_menu {
+        display: block;
+    }
+    
+    #menu {
+        display: none;
+    }
+}
+
+
+
+/* ANIMATION */
+.rainbow {
+    animation: RainbowName 3s infinite;
+    color: red !important;
+    font-weight: bold !important;
+}
+
+@keyframes RainbowName {
+    from {
+        -webkit-filter: hue-rotate(15deg);
+        filter: hue-rotate(15deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}

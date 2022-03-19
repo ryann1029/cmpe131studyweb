@@ -1,5 +1,4 @@
 from flask import Flask, redirect, url_for, render_template # import from Flask
-import webbrowser
 
 app = Flask(__name__)
 
@@ -17,7 +16,7 @@ def user(name):
 
 @app.route("/page1")
 @app.route("/page2")
-@app.route("/page3")
+@app.route("/page2")
 @app.route("/aboutus")
 @app.route("/purpose")
 def page():
