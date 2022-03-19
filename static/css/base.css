@@ -38,11 +38,17 @@ body {
 
 /* Main Content (so it does not become all the way to the edge of the page...) */
 .main__page {
-    background-color: #FFFFFF90; /* #RRGGBBOO, where R=red, g=green, B=blue, O=opacity*/
+    background-color: #00000080; /* #RRGGBBOO, where R=red, g=green, B=blue, O=opacity*/
+    color: var(--normal-font-color);
     padding: 24px 36px; /* veritical | horizontal */
     margin: 1em 4em 1em 4em; /* top | right | bottom |left */
     min-height: 100px;
     overflow: hidden;
+}
+
+.highlight {
+    background-color: rgba(255,255,0,0.8);
+    color: black;
 }
 
 
@@ -85,8 +91,13 @@ body {
     }
 
     /* Text of navigation links are forced specified color */
-    .nav-link {
+    .navbar-light ul > li > a {
         color: var(--normal-font-color) !important;
+        transition: 0.1s;
+    }
+
+    .navbar-light ul > li > a:hover {
+        opacity: 0.5;
     }
 
     /* Custom background-color for navigation background color */
