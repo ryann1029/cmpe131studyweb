@@ -38,11 +38,7 @@ body {
 
 /* Main Content (so it does not become all the way to the edge of the page...) */
 .main__page {
-<<<<<<< HEAD
-    background-color: #00000090; /* #RRGGBBOO, where R=red, g=green, B=blue, O=opacity*/
-=======
     background-color: rgba(var(--background-color-default-rgb), 0.85);
->>>>>>> 85d26b14199cc1ad02700f5a95c6c7f1cc29098e
     color: var(--normal-font-color);
     padding: 24px 36px; /* veritical | horizontal */
     margin: 1em 4em 1em 4em; /* top | right | bottom |left */
