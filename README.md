@@ -1,2 +1,2 @@
-# cmpe131studyapp
-Study App for SJSU CMPE 131
+# cmpe131studyweb
+Study Website for SJSU CMPE 131
