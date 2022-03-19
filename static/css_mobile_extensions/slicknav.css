@@ -6,7 +6,7 @@
 .slicknav_btn {
 	position: relative;
 	display: block;
-	vertical-align: middle;
+	/* vertical-align: middle; */
 	float: right;
 	padding: 0.7em 0.9em 0.7em 0.9em;
 	line-height: 1.125em;
