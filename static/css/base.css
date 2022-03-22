@@ -38,7 +38,7 @@ body {
 
 /* Main Content (so it does not become all the way to the edge of the page...) */
 .main__page {
-    background-color: rgba(var(--background-color-default-rgb), 0.85);
+    background-color: rgba(var(--background-color-default-rgb), 0.95);
     color: var(--normal-font-color);
     padding: 24px 36px; /* veritical | horizontal */
     margin: 1em 4em 1em 4em; /* top | right | bottom |left */
@@ -103,7 +103,7 @@ body {
 
     /* Custom background-color for navigation background color */
     .bg-custom {
-        background-color: rgba(var(--background-color-default-rgb), 0.95);
+        background-color: rgba(var(--background-color-default-rgb), 0.98);
     }
 
     /* Fully hide mobile navigation bar on desktop view */
