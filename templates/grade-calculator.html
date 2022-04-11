@@ -5,7 +5,7 @@
 {% block content %}
 <table>
     <tr>
-        <th>Calculator</th>
+        <th>Calculator <input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>
         <th>Results</th>
     </tr>
     <tr>
@@ -13,6 +13,7 @@
             <div class="form-group">
                 <!-- option for taking the input -->
                 <input type="text" placeholder="Course 1" id="course1"/>
+                <input type="text" placeholder="Score" id="score"/>
                 <input type="text" placeholder="Total Points" id="totalpoints"/>
                 <br/>
                 <input type="button" value="show Percentage" class="form-button" onclick="calculate()"/>
