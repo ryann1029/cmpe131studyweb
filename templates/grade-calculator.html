@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} Grade Calculator {% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Calculator <input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>
+        <th>Results</th>
+    </tr>
+    <tr>
+        <td>
+            <div class="form-group">
+                <!-- option for taking the input -->
+                <input type="text" placeholder="Course 1" id="course1"/>
+                <input type="text" placeholder="Score" id="score"/>
+                <input type="text" placeholder="Total Points" id="totalpoints"/>
+                <br/>
+                <input type="button" value="show Percentage" class="form-button" onclick="calculate()"/>
+            </div>
+        </td>
+
+        <td>
+            <div class="form-group showdata">
+                <p id="showdata"></p>
+            </div>
+        </td>
+
+    </tr>
+</table>
+<!--adding external javascript file-->
+<script src="static\js\calculator.js"></script>
+
+{% endblock %}

@@ -54,6 +54,17 @@ body {
     color: black;
 }
 
+table {
+    border: 3px solid gray;
+    margin: 0.25em;
+}
+
+th, td {
+    border: 1px solid gray;
+    padding: 0.25em;
+    min-width: 10em;
+}
+
 
 
 
@@ -222,3 +233,4 @@ body {
         filter: hue-rotate(360deg);
     }
 }
+/* Edit For HW 5*/

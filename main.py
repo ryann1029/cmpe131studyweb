@@ -13,9 +13,9 @@ app = Flask(__name__)
 def home():
     return render_template("home.html") #using render_template so that it renders the content ot the HTML and does no not affect URL
 
-@app.route("/page1")
+@app.route("/grade-calculator")
 def page1():
-    return render_template("page1.html")
+    return render_template("grade-calculator.html")
 
 @app.route("/aboutus")
 def about_us():
