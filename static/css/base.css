@@ -33,7 +33,10 @@ html, html * {
 
 body {
     background: url("https://images.pexels.com/photos/1036808/pexels-photo-1036808.jpeg");
+    background-position: fixed;
     background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
 }
 
 /* Main Content (so it does not become all the way to the edge of the page...) */
@@ -47,7 +50,7 @@ body {
 }
 
 .highlight {
-    background-color: rgba(255,255,0,0.8);
+    background-color: rgba(160, 234, 240, 0.8);
     color: black;
 }
 
@@ -157,8 +160,11 @@ th, td {
         text-align: end;
         text-transform: uppercase;
         padding: 8px;
-    }
+        
 
+        
+    }
+    
     .style-nav ul li:hover {
         background-color: #555;
     }
@@ -198,11 +204,7 @@ th, td {
     .style-nav ul li {
         text-align: center;
     }
-    
-    .slicknav_menu {
-        display: block;
-    }
-    
+
     #menu {
         display: none;
     }
