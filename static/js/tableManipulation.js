@@ -37,27 +37,27 @@ function addRow(tableID) {
    // alert("Cell added.")
 }
 
-function addColumn(tableID) {
-   var table = $('#'+tableID);
-   var iter = 0;
-   // $('#test').click(function() {
-      table.find('tr').each(
-         function() {
-            var trow = $(this);
-            if (trow.index() == 0) {
-               trow.append("<th>Test" + iter + "</th>");
-            } else {
-               trow.append('<td>\
-               <input type="text" placeholder="Assignment Name" id="assignment" name="assignment[]"/>\
-               <input type="text" style="width: 100px;" placeholder="Score" id="score" name="score[]"/>\
-               <input type="text" style="width: 100px;" placeholder="Total Points" id="totalpoints" name="totalpoints[]"/>\
-               </td>');
-            }
-         }
-      );
-     iter += 1;
-   // });
-}
+// function addColumn(tableID) {
+//    var table = $('#'+tableID);
+//    var iter = 0;
+//    $('#test').click(function() {
+//       table.find('tr').each(
+//          function() {
+//             var trow = $(this);
+//             if (trow.index() === 0) {
+//                trow.append("<th>Test" + iter + "</th>");
+//             } else {
+//                trow.append('<td>\
+//                <input type="text" placeholder="Assignment Name" id="assignment" name="assignment[]"/>\
+//                <input type="text" style="width: 100px;" placeholder="Score" id="score" name="score[]"/>\
+//                <input type="text" style="width: 100px;" placeholder="Total Points" id="totalpoints" name="totalpoints[]"/>\
+//                </td>');
+//             }
+//          }
+//       );
+//      iter += 1;
+//    });
+// }
 
 function rowCount(tableID) {
    var rowCount = 0;
@@ -88,6 +88,27 @@ function columnCount(tableID) {
 
    return columnCount;
 }
+
+var table = $('#dataTable');
+   var iter = 2; // starts creating at 2nd column
+   $('#addColumn').click(function() {
+      table.find('tr').each(
+         function() {
+            var trow = $(this);
+            if (trow.index() === 0) {
+               trow.append('<th>Course ' + (iter) + '<input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>');
+            } else {
+               trow.append('<td>\
+               <input type="text" placeholder="Assignment Name" id="assignment" name="assignment[]"/>\
+               <input type="text" style="width: 100px;" placeholder="Score" id="score" name="score[]"/>\
+               <input type="text" style="width: 100px;" placeholder="Total Points" id="totalpoints" name="totalpoints[]"/>\
+               </td>');
+            }
+         }
+      );
+     iter += 1;
+   });
+
         /*
 		function deleteRow(tableID) {
 			try {

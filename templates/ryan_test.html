@@ -13,13 +13,13 @@ Assigned to Ryan only -->
 
     <body>
         <table id="dataTable" border="1">
-            <thead>
+            <!-- <thead> -->
                 <tr>
                     <th>Course 1 <input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>
                 </tr>
-            </thead>
+            <!-- </thead> -->
             
-            <tbody>
+            <!-- <tbody> -->
                 <tr>
                     <td>
                         <input type="text" placeholder="Assignment Name" id="assignment"/>
@@ -29,15 +29,15 @@ Assigned to Ryan only -->
                     <!-- <td><INPUT type="text" name="text1"/></td> -->
                     <!-- <td> <INPUT type="text" placeholder="Text0"/></td> -->
                 </tr>
-            </tbody>
+            <!-- </tbody> -->
         </table>
 
         <input type="button" value="+ Add Row" onclick="addRow('dataTable')"/>
-        <input type="button" value="+ Add Column" onclick="addColumn('dataTable')"/>
+        <input type="button" value="+ Add Column" id="addColumn" /> <!-- onclick="addColumn('dataTable')" -->
         <div style="position: relative; float: right;">
             <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
             <input type="button" value="Row Count" class="form-button" onclick="rowCount('dataTable')"/></td>
-            <input type="button" value="Column Count" id="test" class="form-button" onclick="columnCount('dataTable')"/></td> <!-- -->
+            <input type="button" value="Column Count" class="form-button" onclick="columnCount('dataTable')"/></td>
         </div>
 
         <div class="form-group showdata">
