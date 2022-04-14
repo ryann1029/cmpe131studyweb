@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %} Big Daddy's Test Page {% endblock %}
+
+{% block content %}
+<html>
+    <head>
+        <title>Big Daddy's Test Page</title>
+    </head>
+
+    <body>
+        <table id="dataTable" border="1">
+            <thead>
+                <tr>
+                    <th>Course 1 <input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
+                        <input type="text" style="width: 100px;" placeholder="Total Points" id="totalpoints"/>
+                    </td>
+                    <!-- <td><INPUT type="text" name="text1"/></td> -->
+                    <!-- <td> <INPUT type="text" placeholder="Text0"/></td> -->
+                </tr>
+            </tbody>
+        </table>
+
+        <input type="button" value="+ Add Row" onclick="addRow('dataTable')"/>
+        <input type="button" value="+ Add Column" onclick="addColumn('dataTable')"/>
+        <div style="position: relative; float: right;">
+            <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
+            <input type="button" value="Row Count" class="form-button" onclick="rowCount('dataTable')"/></td>
+            <input type="button" value="Column Count" id="test" class="form-button" onclick="columnCount('dataTable')"/></td> <!-- -->
+        </div>
+
+        <div class="form-group showdata">
+            <span>Results: <p id="showdata"></p></span>
+        </div>
+
+        <div class="form-group showdata">
+            <span>Row Count: <p id="rowCount"></p></span>
+        </div>
+
+        <div class="form-group showdata">
+            <span>Column Count: <p id="columnCount"></p></span>
+        </div>
+        <!-- <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" /> -->
+
+    </body>
+
+    <script src="static\js\calculator.js"></script>
+	<script src="static\js\tableManipulation.js"></script>
+</html>
+{% endblock %}
