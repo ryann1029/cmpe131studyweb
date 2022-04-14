@@ -26,6 +26,10 @@ def about_us():
 def user(name):
     return render_template("error404.html")
 
+@app.route("/ryan")
+def ryan():
+    return render_template("ryan_test.html")
+
 
 
 
