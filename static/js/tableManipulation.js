@@ -1,3 +1,6 @@
+/* Do not maniplate any of the code in this file yet.
+ * Assigned to Ryan only */
+
 function addRow(tableID) {
    var table = document.getElementById(tableID); // identifying table based on parameter (ID) is passed
 
