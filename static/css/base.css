@@ -65,6 +65,11 @@ th, td {
     min-width: 10em;
 }
 
+/* Adjust font size of input boxes in tables */
+table input {
+    font-size: 9pt !important;
+}
+
 
 
 
