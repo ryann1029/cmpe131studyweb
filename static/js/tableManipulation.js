@@ -49,7 +49,7 @@ $('#addColumn').click(function() {
                trow.append('<td>\
                <input type="text" style="width: 120px;" placeholder="Assignment Name" id="assignment" name="assignment[]"/>\
                <input type="text" style="width: 100px;" placeholder="Score" id="score" name="score[]"/>\
-               <input type="text" style="width: 100px;" placeholder="Possible Points" id="totalpoints" name="pointspossible[]"/>\
+               <input type="text" style="width: 100px;" placeholder="Possible Points" id="pointspossible" name="pointspossible[]"/>\
                </td>');
             }
          }
