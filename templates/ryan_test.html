@@ -20,11 +20,13 @@ Assigned to Ryan only -->
             <!-- </thead> -->
             
             <!-- <tbody> -->
-                <tr>
+                <tr id="firstBodyRow">
                     <td>
                         <input type="text" placeholder="Assignment Name" id="assignment"/>
                         <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
                         <input type="text" style="width: 100px;" placeholder="Total Points" id="totalpoints"/>
+                        <br/>
+                        <button class="deleteBtn">Delete</button>
                     </td>
                     <!-- <td><INPUT type="text" name="text1"/></td> -->
                     <!-- <td> <INPUT type="text" placeholder="Text0"/></td> -->
@@ -32,7 +34,7 @@ Assigned to Ryan only -->
             <!-- </tbody> -->
         </table>
 
-        <input type="button" value="+ Add Row" onclick="addRow('dataTable')"/>
+        <input type="button" value="+ Add Row" id="addRow"/> <!-- onclick="addRow('dataTable')" -->
         <input type="button" value="+ Add Column" id="addColumn" /> <!-- onclick="addColumn('dataTable')" -->
         <div style="position: relative; float: right;">
             <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
@@ -51,11 +53,10 @@ Assigned to Ryan only -->
         <div class="form-group showdata">
             <span>Column Count: <p id="columnCount"></p></span>
         </div>
-        <!-- <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" /> -->
 
     </body>
 
     <script src="static\js\calculator.js"></script>
-	<script src="static\js\tableManipulation.js"></script>
+	<script src="static\js\tableManipulationTest.js"></script>
 </html>
 {% endblock %}
