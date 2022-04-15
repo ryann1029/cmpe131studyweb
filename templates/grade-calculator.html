@@ -3,66 +3,52 @@
 {% block title %} Grade Calculator {% endblock %}
 
 {% block content %}
-<head>
-    <title>Grade Calculator</title>
-</head>
+<html>
+    <head>
+        <title>Grade Calculator</title>
+    </head>
 
-<table>
-    <thead>
-        <tr>
-            <th>Calculator <input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>
-            <th>Results</th>
-        </tr>
-    </thead>
+    <body>
+        <table id="dataTable" border="1">
+            <!-- <thead> -->
+                <tr>
+                    <th>Category 1 <input style="position: relative; float: right; width: 70px" type="text" placeholder="Weight (%)" id="weight"/></th>
+                </tr>
+            <!-- </thead> -->
+            
+            <!-- <tbody> -->
+                <tr id="firstBodyRow">
+                    <td>
+                        <input type="text" style="width: 120px;" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
+                        <input type="text" style="width: 100px;" placeholder="Points Possible" id="pointspossible"/>
+                    </td>
+                </tr>
+            <!-- </tbody> -->
+        </table>
 
-    <tbody>
-        <tr>
-            <td>
-                <div class="form-group">
-                    <!-- option for taking the input -->
-                    <input type="text" placeholder="Course 1" id="assignment"/>
-                    <input type="number" placeholder="Score" id="score"/>
-                    <input type="number" placeholder="Total Points" id="totalpoints"/>
-                    <br/>
-                    <button type="button" id="onAddRow" title="New Assignment" onclick="onAddRow()"><span>+</span> Add row</button>
-                </div>
-                <br/>
-                <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/>
-            </td>
+        <input type="button" value="+ Add Row" id="addRow"/>
+        <input type="button" value="+ Add Column" id="addColumn" />
+        <!-- <div style="position: relative; float: right;">
+            <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
+            <input type="button" value="Row Count" class="form-button" onclick="rowCount('dataTable')"/></td>
+            <input type="button" value="Column Count" class="form-button" onclick="columnCount('dataTable')"/></td>
+        </div> -->
 
-            <td>
-                <div class="form-group showdata">
-                    <p id="showdata"></p>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<!--adding external javascript file-->
-<script src="static\js\calculator.js"></script>
-<script src="static\js\calculator_AddRow.js"></script>
-<script>
-    function addRow(tableID) {
-        var table = document.getElementById(tableID);
+        <div class="form-group showdata">
+            <span>Results: <p id="showdata"></p></span>
+        </div>
 
-        var rowCount = table.rows.length;
-        var row = table.insertRow(rowCount);
+        <div class="form-group showdata">
+            <span>Row Count: <p id="rowCount"></p></span>
+        </div>
 
-        var cell1 = row.insertCell(0);
-        var element1 = document.createElement("input");
-        element1.type = "checkbox";
-        element1.name="chkbox[]";
-        cell1.appendChild(element1);
+        <div class="form-group showdata">
+            <span>Column Count: <p id="columnCount"></p></span>
+        </div>
+    </body>
 
-        var cell2 = row.insertCell(1);
-        cell2.innerHTML = rowCount + 1;
-
-        var cell3 = row.insertCell(2);
-        var element2 = document.createElement("input");
-        element2.type = "text";
-        element2.name = "txtbox[]";
-        cell3.appendChild(element2);
-}
-</script>
-
+    <script src="static\js\calculator.js"></script>
+	<script src="static\js\tableManipulation.js"></script>
+</html>
 {% endblock %}
