@@ -3,24 +3,26 @@ const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect
 const calculate = () => {
   
     // Getting input from user into height variable.
-    let course1 = document.querySelector("#assignment").value;
+    let assignment = document.querySelector("#assignment").value;
     let score = document.querySelector("#score").value;
-    let total_points = document.querySelector("#totalpoints").value;
-    let weight = document.querySelector("#weight").value; 
+    let total_points = document.querySelector("#pointspossible").value;
+    let weight = document.querySelector("#weight").value;
     let grades = "";
     
     // Input is string so typecasting is necessary. */
-    let course1_points = parseFloat(score);
+    let total_score = parseFloat(score);
     
     // Checking the condition for the providing the 
     // grade to student based on percentage
-    let percentage = ((course1_points/total_points) * 100);
+    let percentage = ((total_score/total_points) * 100);
     
     
 
     // checking to see if the user added a correct value for weight 
     if (weight < 0 || weight > 100)
-      document.querySelector("#showdata").innerHTML = "The weight entered must be between 0 and 100";
+      document.querySelector("#showdata").innerHTML = `
+      <div style="color: red;">The weight entered must be between 0% and 100%.</div>
+      `;
     else {
 
     if (percentage <= 100 && percentage >= 90) {
@@ -36,36 +38,41 @@ const calculate = () => {
     }
 
     // Checking if inputs is either empty, contains characters not part of the alphabet, or something otherwise.
-    if (course1 == "") {
-    document.querySelector("#showdata").innerHTML
-        = `Please enter all the fields`;
+    if (assignment == "") {
+    document.querySelector("#showdata").innerHTML = `
+    <div style="color: red;">Please enter all the fields.</div>
+    `;
         
-    } else if(!isAlpha(course1)){
-        document.querySelector("#showdata").innerHTML =
-        `No special characters are allowed for course name. Correct your inputs.`
+    } else if(!isAlpha(assignment)){
+        document.querySelector("#showdata").innerHTML = `
+        <div style="color: red;">No special characters are allowed for course name. Correct your inputs.</div>
+        `;
 
     } else if (!weight) {
-      document.querySelector("#showdata").innerHTML =
-      `No weight inputted.`
+      document.querySelector("#showdata").innerHTML = `
+      <div style="color: red;">No weight inputted.</div>
+      `;
 
     } else if (!score) {
-      document.querySelector("#showdata").innerHTML =
-      `No score inputted.`
+      document.querySelector("#showdata").innerHTML = `
+      <div style="color: red;">No score inputted.</div>
+      `;
 
     } else if (!total_points) {
-      document.querySelector("#showdata").innerHTML =
-      `No total points inputted.`
+      document.querySelector("#showdata").innerHTML = `
+      <div style="color: red;">No total points inputted.</div>
+      `;
 
     } else {
     // Checking the condition for the fail and pass
         if (percentage >= 70) {
             document.querySelector("#showdata").innerHTML = 
-            `You have ${course1_points} points out of ${total_points}, which is a percentage of ${percentage}%.<br/> 
+            `You have ${total_score} points out of ${total_points}, which is a percentage of ${percentage}%.<br/> 
             <b>Your grade is ${grades}, <u>a passing grade</u></b>.`;
 
         } else {
             document.querySelector("#showdata").innerHTML = 
-            `You have ${course1_points} points out of ${total_points}, which is a percentage of ${percentage}%.<br/> 
+            `You have ${total_score} points out of ${total_points}, which is a percentage of ${percentage}%.<br/> 
             <b>Your grade is ${grades}. <u>Unfortunately, you failed</u></b>.`
         }
     }
