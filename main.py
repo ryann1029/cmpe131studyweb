@@ -1,5 +1,5 @@
 ####### IMPORTS #######
-from flask import Flask, redirect, url_for, render_template # import from Flask
+from flask import Flask, redirect, url_for, render_template, request # import from Flask
 
 app = Flask(__name__)
 
@@ -21,10 +21,22 @@ def page1():
 def about_us():
     return render_template("about_us.html")
 
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    if request.method == "POST":
+        user = request.form["name"]
+        return redirect(url_for("user", usr=user))
+    else:
+        return render_template("login.html")
+
+@app.route("/<usr>")
+def user(usr):
+    return f"<h1>{usr}</h1>"
+
 # Any pages that don't exist goes to "error404.html"
-@app.route("/<name>")
-def user(name):
-    return render_template("error404.html")
+# @app.route("/<name>")
+# def user(name):
+#     return render_template("error404.html")
 
 @app.route("/ryan")
 def ryan():
