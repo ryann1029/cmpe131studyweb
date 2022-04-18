@@ -6,14 +6,14 @@ function CheckAssignmentCondition(assignment, row_number){
     <div style="color: red;">Please enter all the fields in row ${row_number}.</div>
     `;
     process.exit(1); 
-    }
+  }
+
   if(!isAlpha(assignment)){
     document.querySelector("#showdata").innerHTML = `
     <div style="color: red;">No special characters are allowed for course name in row ${row_number}. Correct your inputs.</div>
     `;
     process.exit(1); 
-
-}
+  }
 }
 
 const calculate = () => {
@@ -68,23 +68,23 @@ const calculate = () => {
     
 
     // checking to see if the user added a correct value for weight 
-    if (total_weight < 0 || total_weight > 100)
+    if (total_weight < 0 || total_weight > 100) {
       document.querySelector("#showdata").innerHTML = `
       <div style="color: red;">The weight entered must be between 0% and 100%.</div>
       `;
-    else {
-
-    if (percentage <= 100 && percentage >= 90) {
-      grades = "A";
-    } else if (percentage < 90 && percentage >= 80) {
-      grades = "B";
-    } else if (percentage < 80 && percentage >= 70) {
-      grades = "C";
-    } else if (percentage < 70 && percentage >= 60) {
-      grades = "D";
     } else {
-      grades = "F";
-    }
+
+      if (percentage <= 100 && percentage >= 90) {
+        grades = "A";
+      } else if (percentage < 90 && percentage >= 80) {
+        grades = "B";
+      } else if (percentage < 80 && percentage >= 70) {
+        grades = "C";
+      } else if (percentage < 70 && percentage >= 60) {
+        grades = "D";
+      } else {
+        grades = "F";
+      }
 
     // Checking if inputs is either empty, contains characters not part of the alphabet, or something otherwise.
     // if (assignment == "") {
@@ -115,16 +115,16 @@ const calculate = () => {
 
     } else {
     // Checking the condition for the fail and pass
-        if (percentage >= 70) {
-            document.querySelector("#showdata").innerHTML = 
-            `Your percentage is ${percentage}%.<br/> 
-            <b>Your grade is a ${grades}, <u>a passing grade</u></b>.`;
+      if (percentage >= 70) {
+          document.querySelector("#showdata").innerHTML = 
+          `Your percentage is ${percentage}%.<br/> 
+          <b>Your grade is a ${grades}, <u>a passing grade</u></b>.`;
 
-        } else {
-            document.querySelector("#showdata").innerHTML = 
-            `Your percentage is ${percentage}%.<br/> 
-            <b>Your grade is a ${grades}. <u>Unfortunately, you failed</u></b>.`
-        }
+      } else {
+          document.querySelector("#showdata").innerHTML = 
+          `Your percentage is ${percentage}%.<br/> 
+          <b>Your grade is a ${grades}. <u>Unfortunately, you failed</u></b>.`
+      }
     }
   }
 };
