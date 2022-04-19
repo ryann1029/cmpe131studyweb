@@ -1,61 +1,130 @@
-const isAlpha = str => /^[a-zA-Z0-9]*$/.test(str); // Using RegEx to detect any letters.
+const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect any letters.
+
+function CheckAssignmentCondition(assignment, row_number){
+  if (assignment == "") {
+    document.querySelector("#showdata").innerHTML = `
+    <div style="color: red;">Please enter all the fields in row ${row_number}.</div>
+    `;
+    process.exit(1); 
+  }
+
+  if(!isAlpha(assignment)){
+    document.querySelector("#showdata").innerHTML = `
+    <div style="color: red;">No special characters are allowed for course name in row ${row_number}. Correct your inputs.</div>
+    `;
+    process.exit(1); 
+  }
+}
 
 const calculate = () => {
   
-    // Getting input from user into height variable.
-    let course1 = document.querySelector("#course1").value;
-    let score = document.querySelector("#score").value;
-    let total_points = document.querySelector("#totalpoints").value;
-    let weight = document.querySelector("#weight").value; 
+    // Getting input from user into height variable
     let grades = "";
+
+    // store the ((total pts / total possible pts) * weight) of each column the user made 
+    // make an empty array first, this will hold all the values
+    let total_score_sum = [0, 0, 0, 0, 0]; 
+    let total_points_possible = [0, 0, 0, 0, 0]; 
+    let weighted_grade_points = [0, 0, 0, 0, 0]; 
+    let temp_weight = [0, 0, 0, 0, 0] 
+    column_counter = 0; 
+
+    // this should calculate the total weight, if it is less than 100 after the for loop, terminate 
+    // and let the user know the total weight should sum to 100 or greater. 
+    let total_weight = 0; 
+    let score_sum = 0; 
+    let total_points_sum = 0; 
     
-    // Input is string so typecasting is necessary. */
-    let course1_points = parseFloat(score);
+    let CalcTable = document.getElementById('dataTable'); 
+  
+    let total_grade_points = 0; 
+
+    for (var i = 0; i < CalcTable.rows.length; ++i){
+      for (var k = 0; k < CalcTable.rows[i].cells.length && i == 0; ++k){
+        column_counter++; 
+        var row_weight = CalcTable.rows[i].cells[k]; 
+        temp_weight[k] = parseFloat(row_weight.querySelector("#weight").value); 
+      }
+      for (var j = 0; j < CalcTable.rows[i].cells.length; ++j){
+        if (i == 0)
+          continue; 
+        var row = CalcTable.rows[i].cells[j]; 
+        total_score_sum[j] += parseFloat(row.querySelector("#score").value);
+        total_points_possible[j] += parseFloat(row.querySelector("#pointspossible").value); 
+      }
+    }
+ 
+
+    for (var i = 0; i < column_counter; ++i){
+      weighted_grade_points[i] = (total_score_sum[i] / total_points_possible[i]) * temp_weight[i]; 
+      console.log(weighted_grade_points[0]); 
+      total_grade_points += weighted_grade_points[i]; 
+    }
     
-    // Checking the condition for the providing the 
-    // grade to student based on percentage
-    let percentage = ((course1_points/total_points) * 100);
-    
+    console.log(temp_weight[0]); 
+    // let grade_sum = column_points[0]; 
+   
+    let percentage = total_grade_points; 
     
 
     // checking to see if the user added a correct value for weight 
-    if (weight < 0 || weight > 100)
-      document.querySelector("#showdata").innerHTML = "The weight entered must be between 0 and 100";
-    else {
-
-    if (percentage <= 100 && percentage >= 90) {
-      grades = "A";
-    } else if (percentage < 90 && percentage >= 80) {
-      grades = "B";
-    } else if (percentage < 80 && percentage >= 70) {
-      grades = "C";
+    if (total_weight < 0 || total_weight > 100) {
+      document.querySelector("#showdata").innerHTML = `
+      <div style="color: red;">The weight entered must be between 0% and 100%.</div>
+      `;
     } else {
-      grades = "F";
-    }
 
-    // Checking if inputs is either empty, contains alphabets, or something otherwise.
-    if (course1 == "") {
-    document.querySelector("#showdata").innerHTML
-        = `Please enter all the fields`;
+      if (percentage <= 100 && percentage >= 90) {
+        grades = "A";
+      } else if (percentage < 90 && percentage >= 80) {
+        grades = "B";
+      } else if (percentage < 80 && percentage >= 70) {
+        grades = "C";
+      } else if (percentage < 70 && percentage >= 60) {
+        grades = "D";
+      } else {
+        grades = "F";
+      }
+
+    // Checking if inputs is either empty, contains characters not part of the alphabet, or something otherwise.
+    // if (assignment == "") {
+    // document.querySelector("#showdata").innerHTML = `
+    // <div style="color: red;">Please enter all the fields.</div>
+    // `;
         
-    } else if(isAlpha(course1)){
-        document.querySelector("#showdata").innerHTML =
-        `No special charactersare allowed for course name. Correct your inputs.`
+    // } else if(!isAlpha(assignment)){
+    //     document.querySelector("#showdata").innerHTML = `
+    //     <div style="color: red;">No special characters are allowed for course name. Correct your inputs.</div>
+    //     `;
+
+    // } 
+     if (!weight) {
+      document.querySelector("#showdata").innerHTML = `
+      <div style="color: red;">No weight inputted.</div>
+      `;
+
+    // } else if (!score_sum) {
+    //   document.querySelector("#showdata").innerHTML = `
+    //   <div style="color: red;">No score inputted.</div>
+    //   `;
+
+    // } else if (!total_points_sum) {
+    //   document.querySelector("#showdata").innerHTML = `
+    //   <div style="color: red;">No total points inputted.</div>
+    //   `;
 
     } else {
     // Checking the condition for the fail and pass
-        if (percentage >= 39.5) {
-            document.querySelector(
-            "#showdata"
-            ).innerHTML = 
-            `You have ${course1_points} points out of ${total_points}, which is a percentage of ${percentage}%.<br/> 
-            <b>Your grade is ${grades}, <u>a passing grade</u></b>.`;
+      if (percentage >= 70) {
+          document.querySelector("#showdata").innerHTML = 
+          `Your percentage is ${percentage}%.<br/> 
+          <b>Your grade is a ${grades}, <u>a passing grade</u></b>.`;
 
-        } else {
-            document.querySelector("#showdata").innerHTML = 
-            `You have ${course1_points} points out of ${total_points}, which is a percentage of ${percentage}%.<br/> 
-            <b>Your grade is ${grades}. <u>Unfortunately, you failed</u></b>.`
-        }
+      } else {
+          document.querySelector("#showdata").innerHTML = 
+          `Your percentage is ${percentage}%.<br/> 
+          <b>Your grade is a ${grades}. <u>Unfortunately, you failed</u></b>.`
+      }
     }
   }
-};  
+};
