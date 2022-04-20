@@ -28,7 +28,7 @@ TABLE OF CONTENTS
 /* Applied for all views (e.g., desktop, tablet, and mobile */
 html, html * {
     box-sizing: border-box;
-    font-family: var(--font-family-default);
+    font-family: var(--font-family-default); 
 }
 
 body {
