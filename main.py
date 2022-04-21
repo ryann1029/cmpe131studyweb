@@ -22,6 +22,10 @@ def home():
 def page1():
     return render_template("grade-calculator.html")
 
+@app.route("/calendar")
+def page2():
+    return render_template("calendar.html")
+
 @app.route("/aboutus")
 def about_us():
     return render_template("about_us.html")
@@ -71,7 +75,6 @@ def ryan():
 
 
 ####### INACTIVE PAGES - redirects to "home.html" #######
-@app.route("/page2")
 @app.route("/page3")
 @app.route("/purpose")
 def page():

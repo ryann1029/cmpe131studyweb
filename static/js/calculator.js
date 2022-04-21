@@ -100,21 +100,25 @@ const calculate = () => {
          `;
 
     }else{
-      if (!weight) {
+      if (weight.value== "") {
+        
         document.querySelector("#showdata").innerHTML = `
         <div style="color: red;">No weight inputted.</div>
         `;
-  
-       // } else if (!score_sum) {
-    //   document.querySelector("#showdata").innerHTML = `
-    //   <div style="color: red;">No score inputted.</div>
-    //   `;
+        }
+       else if (score_sum.value== "") {
+       document.querySelector("#showdata").innerHTML = `
+       <div style="color: red;">No score inputted.</div>
+       `;
 
     // } else if (!total_points_sum) {
     //   document.querySelector("#showdata").innerHTML = `
     //   <div style="color: red;">No total points inputted.</div>
     //   `;
-
+    //else if ((!/^[0-9]+$/.test(weight.value))){
+     // document.querySelector("#showdata").innerHTML = `
+      // <div style="color: red;">Please only include numbers for the score.</div>
+      // `;
   
       } else {
         // Checking the condition for the fail and pass
