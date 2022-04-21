@@ -1,15 +1,24 @@
-{% extends "base.html" %}
+{%extends "base.html"%}
 
-{% block title %} Calendar {% endblock %}
+{%block title%} Calendar {% endblock%}%
 
 {% block content %}
 <html>
 
     <head>
         <title>Calendar</title>
-        {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> {% endcomment %}
+        <link rel="stylesheet" href="static\css\base.css" type="text/css">
+        <link rel="stylesheet" href="static\css\calendar.css" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     </head>
-        <body>
+        <body class="calendar-class">
             <div "container">
                 <div "calendar">
                     <div "month">
@@ -79,5 +88,4 @@
         </body>
 
 </html>
-
 {% endblock %}
