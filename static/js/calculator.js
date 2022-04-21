@@ -130,6 +130,5 @@ const calculate = () => {
         }
       }
     }
-    
   }
 };
