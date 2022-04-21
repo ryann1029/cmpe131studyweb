@@ -1,7 +1,12 @@
 ####### IMPORTS #######
-from flask import Flask, redirect, url_for, render_template, request # import from Flask
+from flask import Flask, redirect, url_for, render_template, request, session, flash # import from Flask
+from datetime import timedelta
+import sqlalchemy
+
 
 app = Flask(__name__)
+app.secret_key = "Test" # Make key complicated at one point
+app.permanent_session_lifetime = timedelta(days=1) # permanent session will be kept for this long
 
 
 
@@ -24,14 +29,33 @@ def about_us():
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
+        session.permanent = True # enable/disable permanent session
         user = request.form["name"]
-        return redirect(url_for("user", usr=user))
+        session["user"] = user # storing value of user in the dictionary.
+        flash("Logged In Sucessfully.")
+        return redirect(url_for("user"))
     else:
         return render_template("login.html")
+        
 
-@app.route("/<usr>")
-def user(usr):
-    return f"<h1>{usr}</h1>"
+@app.route("/logout")
+def logout():
+    if "user" in session:
+        user = session["user"]
+        flash(f"Successfully logged out. Bye, {user}")
+    session.pop("user", None) # pop session
+    return redirect(url_for("login"))
+
+    
+
+@app.route("/user")
+def user():
+    if "user" in session: # checking if "user" in dictionary has a value
+        user = session["user"]
+        return render_template("user.html", user=user)
+    else:
+        return redirect(url_for("login"))
+        
 
 # Any pages that don't exist goes to "error404.html"
 # @app.route("/<name>")
