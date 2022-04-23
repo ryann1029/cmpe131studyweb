@@ -1,20 +1,20 @@
 const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect any letters.
 
-function CheckAssignmentCondition(assignment, row_number) {
-  if (assignment == "") {
+/*function CheckAssignmentCondition(assignment, row_number) {
+  if (assignment.value == "") { //changed from assignment to assignment.val
     document.querySelector("#showdata").innerHTML = `
     <div style="color: red;">Please enter all the fields in row ${row_number}.</div>
     `;
     process.exit(1);
   }
 
-  if (!isAlpha(assignment)) {
+  if (!/^[\w\d\s]+$/.test(assignment.value)) { // changed from assignment to assignment.val
     document.querySelector("#showdata").innerHTML = `
     <div style="color: red;">No special characters are allowed for course name in row ${row_number}. Correct your inputs.</div>
     `;
     process.exit(1);
   }
-}
+}*/
 
 const calculate = () => {
 
@@ -33,7 +33,8 @@ const calculate = () => {
   // and let the user know the total weight should sum to 100 or greater. 
   let total_weight = 0;
   let score_sum = 0;
-  let total_points_sum = 0;
+  //let total_points_sum = 0;
+ 
 
   let CalcTable = document.getElementById('dataTable');
 
@@ -46,14 +47,23 @@ const calculate = () => {
       temp_weight[k] = parseFloat(row_weight.querySelector("#weight").value);
     }
     for (var j = 0; j < CalcTable.rows[i].cells.length; ++j) {
-      if (i == 0)
+      if (i == 0){
         continue;
+      }
+        
       var row = CalcTable.rows[i].cells[j];
+
+      console.log("TEST: "+ row.querySelector("#score").value)
+
+    
       total_score_sum[j] += parseFloat(row.querySelector("#score").value);
       total_points_possible[j] += parseFloat(row.querySelector("#pointspossible").value);
     }
+
+    
   }
 
+  
 
   for (var i = 0; i < column_counter; ++i) {
     weighted_grade_points[i] = (total_score_sum[i] / total_points_possible[i]) * temp_weight[i];
@@ -74,7 +84,7 @@ const calculate = () => {
       `;
   } else {
 
-    if (percentage <= 100 && percentage >= 90) {
+    if (percentage >= 90) {
       grades = "A";
     } else if (percentage < 90 && percentage >= 80) {
       grades = "B";
@@ -86,54 +96,54 @@ const calculate = () => {
       grades = "F";
     }
 
+    console.log("WRVDS: "+ total_score_sum[0])
     // Checking if inputs is either empty, contains characters not part of the alphabet, or something otherwise.
     //console.log("ASSIGNMENT: " + /^[\w\d\s]+$/.test(assignment.value))
     if (assignment.value == "") {
+      //assignment.value=="0";
       document.querySelector("#showdata").innerHTML = `
      <div style="color: red;">Please enter all the fields.</div>
      `;
 
-    } else if (!/^[\w\d\s]+$/.test(assignment.value)) {
-
+    } else if (!/^[\w\d\s]+$/.test(assignment.value)) { //special characters aren't being detected for the second row
+    console.log("assignment: " + assignment.value)
       document.querySelector("#showdata").innerHTML = `
          <div style="color: red;">No special characters are allowed for course name. Correct your inputs.</div>
          `;
 
-    }else{
-      if (weight.value== "") {
-        
-        document.querySelector("#showdata").innerHTML = `
-        <div style="color: red;">No weight inputted.</div>
-        `;
-        }
-       else if (score_sum.value== "") {
-       document.querySelector("#showdata").innerHTML = `
-       <div style="color: red;">No score inputted.</div>
-       `;
+    } else if (weight.value == "") {
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">No weight inputted.</div>
+     `;
+    } else if (!/^[0-9]+$/.test(weight.value)) {
 
-    // } else if (!total_points_sum) {
-    //   document.querySelector("#showdata").innerHTML = `
-    //   <div style="color: red;">No total points inputted.</div>
-    //   `;
-    //else if ((!/^[0-9]+$/.test(weight.value))){
-     // document.querySelector("#showdata").innerHTML = `
-      // <div style="color: red;">Please only include numbers for the score.</div>
-      // `;
-  
-      } else {
+      document.querySelector("#showdata").innerHTML = `
+        <div style="color: red;">Please only include numbers for the weight.</div>
+        `;
+    } else if (Number.isNaN(total_score_sum[0]) || Number.isNaN(total_points_possible[0])) {
+
+      console.log("score: " +total_score_sum[0])
+      console.log("possible: " +total_points_possible[0])
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">Please make sure score and/or total point fields only contains numbers</div>
+     `;
+
+    }else { // when else statement is here, itll detect special characters but not weight
+
+       
         // Checking the condition for the fail and pass
         if (percentage >= 70) {
           document.querySelector("#showdata").innerHTML =
             `Your percentage is ${percentage}%.<br/> 
             <b>Your grade is a ${grades}, <u>a passing grade</u></b>.`;
-  
+
         } else {
           document.querySelector("#showdata").innerHTML =
             `Your percentage is ${percentage}%.<br/> 
             <b>Your grade is a ${grades}. <u>Unfortunately, you failed</u></b>.`
         }
-      }
+      
     }
-    
+
   }
 };
