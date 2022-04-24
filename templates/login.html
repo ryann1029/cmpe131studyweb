@@ -6,19 +6,17 @@
 <head>
     <title>Log In | Study University Scholar</title>
 </head>
-
+<form action="#" method="post" style="text-align: center">
+    <!-- <p><input type="text" name="username" placeholder="Username" value="{{user if user}}"/></p> -->
+    <p>Email<br/><input style="width: 25%;" type="email" name="email" placeholder="Email" value="{{email if email}}"/></p>
+    <p>Password<br/><input style="width: 25%;" type="password" name="password" placeholder="Password" value="{{password if password}}"/></p>
+    <p><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log In</button></p>
+</form>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}
-                <p>{{msg}}</p>
+                <center><div style="color: red">{{msg}}</div></center>
             {% endfor %}
         {% endif %}
     {% endwith %}
-<form action="#" method="post">
-    <p>Name:</p>
-    <p><input type="text" name="username" placeholder="Username" value="{{user if user}}"/></p>
-    <p><input type="email" name="email" placeholder="Email" value="{{email if email}}"/></p>
-    <p><input type="password" name="password" placeholder="Password" value="{{password if password}}"/></p>
-    <p><input type="submit" value="Enter"/></p>
-</form>
 {% endblock %}
