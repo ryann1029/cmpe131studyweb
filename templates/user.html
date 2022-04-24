@@ -3,6 +3,9 @@
 {% block title %} User:{{user}} {% endblock %}
 
 {% block content %}
+<head>
+    <title>User:{{user}} | Study University Scholar</title>
+</head>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}
@@ -10,6 +13,12 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-<span class="highlight">Welcome, {{user}}!</span>
+
+<span class="highlight">Welcome, {{user}}!<br/>Email: {{email}}</span>
+
+<form action="#" method="post">
+    <input type="email" name="email" placeholder="Enter Email" value="{{email if email}}"/>
+    <input type="submit" value="submit"/>
+</form>
 
 {% endblock %}

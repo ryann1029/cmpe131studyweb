@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %} Log In/Sign Up {% endblock %}
+{% block title %} Log In {% endblock %}
 
 {% block content %}
+<head>
+    <title>Log In | Study University Scholar</title>
+</head>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}
@@ -12,7 +16,9 @@
     {% endwith %}
 <form action="#" method="post">
     <p>Name:</p>
-    <p><input type="text" name="name"/></p>
+    <p><input type="text" name="username" placeholder="Username"/></p>
+    <p><input type="email" name="email" placeholder="Email"/></p>
+    <p><input type="password" name="password" placeholder="Password"/></p>
     <p><input type="submit" value="Enter"/></p>
 </form>
 {% endblock %}
