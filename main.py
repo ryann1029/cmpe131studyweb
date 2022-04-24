@@ -68,10 +68,13 @@ def signup():
         password = request.form["password"]
         repassword = request.form["repassword"]
 
+        if (user == "") or (email == "") or (password == "") or (repassword == ""):
+            flash("Please fill all entries.")
+            return render_template("signup.html")
+
         if repassword != repassword:
             flash("Password does not match. Please retry sign up again.")
         else:
-
             found_email = users.query.filter_by(email=email).first()
 
             if found_email:
@@ -91,28 +94,46 @@ def signup():
 # LOG IN PAGE
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    message = Markup("Username or email does not exist. Please check your entries or <a href=\"signup\">sign up</a>.")
     if request.method == "POST":
         session.permanent = True # enable/disable permanent session
         user = request.form["username"]
         email = request.form["email"]
         password = request.form["password"]
 
-        email_exist = users.query.filter_by(email=email).first()
-        if email_exist:
-            email_password_match = users.query.filter_by(email=email, password=password).first()
-
-            if email_password_match:
-                session["user"] = user # storing value of user in the dictionary.
-                session["email"] = email
-                flash("Logged In Sucessfully.")
-                return redirect(url_for("user"))
-            else:
-                flash("Password does not match.")
-                return redirect(url_for("login"))
+        if (user == "") or (email == "") or (password == ""):
+            user1 = None
+            email1 = None
+            password1 = None
+            if user != "":
+                user1 = user
+            if email != "":
+                email1 = email
+            if password != "":
+                password1 = password
+            flash("Please fill all entries.")
+            return render_template("login.html", user=user1, email=email1, password=password1)
+        
         else:
-            message = Markup("Email does not exist. Please <a href=\"signup\">sign up</a>.")
-            flash(message)
-            return redirect(url_for("login"))
+            username_exist = users.query.filter_by(user=user).first()
+            if username_exist:
+                email_exist = users.query.filter_by(email=email).first()
+                if email_exist:
+                    email_password_match = users.query.filter_by(email=email, password=password).first()
+                    if email_password_match:
+                        session["user"] = user # storing value of user in the dictionary.
+                        session["email"] = email
+                        flash("Logged In Sucessfully.")
+                        return redirect(url_for("user"))
+                    else:
+                        flash("Password does not match.")
+                        return render_template("login.html", user=user, email=email, password=password)
+                else:
+                    flash(message)
+                    return render_template("login.html", user=user, email=email, password=password)
+            else:
+                flash(message)
+                return render_template("login.html", user=user, email=email, password=password)
     else:
         return render_template("login.html")
         
@@ -140,20 +161,18 @@ def view():
     else:
         return redirect(url_for("login"))
     
-
+# USER PAGE
 @app.route("/user")
 def user():
-    email = None
-    if "user" in session: # checking if "user" in dictionary has a value
+    if "email" in session: # checking if "user" in dictionary has a value
         user = session["user"]
-
-        if request.method == "POST":
-            email = request.form["email"]
-            session["email"] = email
-        else:
-            if "email" in session:
-                email = session["email"]
+        email = session["email"]
         
+        # found_email = users.query.filter_by(email=email).first()
+        # fetch_user = users.query(users).one(found_email.user)
+        # session["user"] = fetch_user.user
+        # user = session["user"]
+    
         return render_template("user.html", user=user, email=email)
     else:
         return redirect(url_for("login"))
@@ -185,10 +204,10 @@ def page():
 # Run Program
 if __name__ == "__main__":
     db.create_all() # creates database - must be before app.run()
-    found_email = users.query.filter_by(email="ryannguyen1029@gmail.com").first()
+    found_email = users.query.filter_by(email="admin@sus.com").first()
     if found_email:
         pass
     else:
-        db.session.add(users("admin", "ryannguyen1029@gmail.com", "adminpassiscuh!"))
+        db.session.add(users("admin", "admin@sus.com", "adminpassiscuh!"))
         db.session.commit()
     app.run(debug = True) # runs program. Every time you save any file, the new version will run.

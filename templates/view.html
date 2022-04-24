@@ -7,6 +7,6 @@
         <title>Admin - Database View | Study University Scholar</title>
     </head>
     {% for item in values %}
-        <p>Username: {{item.user}}<br/>Email: {{item.email}}<br/>Password: {{item.password}}<br/><br/></p>
+        <p>ID: #{{item._id}}<br/>Username: {{item.user}}<br/>Email: {{item.email}}<br/>Password: {{item.password}}<br/><br/></p>
     {% endfor %}
 {% endblock %}

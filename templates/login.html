@@ -16,9 +16,9 @@
     {% endwith %}
 <form action="#" method="post">
     <p>Name:</p>
-    <p><input type="text" name="username" placeholder="Username"/></p>
-    <p><input type="email" name="email" placeholder="Email"/></p>
-    <p><input type="password" name="password" placeholder="Password"/></p>
+    <p><input type="text" name="username" placeholder="Username" value="{{user if user}}"/></p>
+    <p><input type="email" name="email" placeholder="Email" value="{{email if email}}"/></p>
+    <p><input type="password" name="password" placeholder="Password" value="{{password if password}}"/></p>
     <p><input type="submit" value="Enter"/></p>
 </form>
 {% endblock %}
