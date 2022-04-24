@@ -34,34 +34,42 @@ class users(db.Model):
 @app.route("/") # "/" means default page. In this case, the homepage.
 @app.route("/home")
 def home():
-    user = None
-    if "user" in session:
-        user = session["user"]
-    return render_template("home.html", user=user) #using render_template so that it renders the content ot the HTML and does no not affect URL
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+    return render_template("home.html", user=current_user) #using render_template so that it renders the content ot the HTML and does no not affect URL
 
 # GRADE CALCULATOR PAGE
 @app.route("/grade-calculator")
 def calculator():
-    user = None
-    if "user" in session:
-        user = session["user"]
-    return render_template("grade-calculator.html", user=user)
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+    return render_template("grade-calculator.html", user=current_user)
 
 # CALENDAR PAGE
 @app.route("/calendar")
-def page2():
-    user = None
-    if "user" in session:
-        user = session["user"]
-    return render_template("calendar.html", user=user)
+def calender():
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+    return render_template("calendar.html", user=current_user)
 
 # ABOUT US PAGE
 @app.route("/aboutus")
 def about_us():
-    user = None
-    if "user" in session:
-        user = session["user"]
-    return render_template("about_us.html", user=user)
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+    return render_template("about_us.html", current_user=user)
 
 
 
@@ -83,11 +91,21 @@ def signup():
         repassword = request.form["repassword"]
 
         if (user == "") or (email == "") or (password == "") or (repassword == ""):
-            flash("Please fill all entries.")
-            return render_template("signup.html")
+            user1 = None
+            email1 = None
 
-        if repassword != repassword:
+            if user != "":
+                user1 = user
+            if email != "":
+                email1 = email
+
+            flash("Please fill all entries.")
+            return render_template("signup.html", special_user=user1, special_email=email1)
+
+        if password != repassword:
             flash("Password does not match. Please retry sign up again.")
+            return render_template("signup.html", special_user=user1, special_email=email1)
+
         else:
             found_email = users.query.filter_by(email=email).first()
 
@@ -109,49 +127,44 @@ def signup():
 @app.route("/login", methods=["POST", "GET"])
 def login():
     message = Markup("Username or email does not exist. Please check your entries or <a href=\"signup\">sign up</a>.")
-    if "user" in session:
+    if "email" in session:
         flash(Markup("You are current logged in. <a href=\"logout\">Sign out</a> to log in on another account."))
         return redirect(url_for("user"))
 
     if request.method == "POST":
         session.permanent = True # enable/disable permanent session
-        user = request.form["username"]
         email = request.form["email"]
         password = request.form["password"]
 
-        if (user == "") or (email == "") or (password == ""):
-            user1 = None
+        if (email == "") or (password == ""):
             email1 = None
             password1 = None
-            if user != "":
-                user1 = user
+
             if email != "":
                 email1 = email
             if password != "":
                 password1 = password
             flash("Please fill all entries.")
-            return render_template("login.html", user=user1, email=email1, password=password1)
+            return render_template("login.html", email=email1, password=password1)
         
         else:
-            username_exist = users.query.filter_by(user=user).first()
-            if username_exist:
-                email_exist = users.query.filter_by(email=email).first()
-                if email_exist:
-                    email_password_match = users.query.filter_by(email=email, password=password).first()
-                    if email_password_match:
-                        session["user"] = user # storing value of user in the dictionary.
-                        session["email"] = email
-                        flash("Logged In Sucessfully.")
-                        return redirect(url_for("user"))
-                    else:
-                        flash("Password does not match.")
-                        return render_template("login.html", user=user, email=email, password=password)
+            email_exist = users.query.filter_by(email=email).first()
+            if email_exist:
+                email_password_match = users.query.filter_by(email=email, password=password).first()
+                if email_password_match:
+                    session["email"] = email # storing value of email in the dictionary.
+                    
+                    flash("Logged in sucessfully!")
+                    return redirect(url_for("user"))
                 else:
-                    flash(message)
-                    return render_template("login.html", user=user, email=email, password=password)
+                    flash("Password does not match.")
+                    return render_template("login.html", email=email, password=password)
             else:
                 flash(message)
-                return render_template("login.html", user=user, email=email, password=password)
+                return render_template("login.html", email=email, password=password)
+            # else:
+            #     flash(message)
+            #     return render_template("login.html", user=user, email=email, password=password)
     else:
         return render_template("login.html")
         
@@ -159,9 +172,13 @@ def login():
 # LOG OUT PAGE
 @app.route("/logout")
 def logout():
-    if "user" in session:
-        user = session["user"]
-        flash(f"Successfully logged out. See you later, {user}!")
+    if "email" in session:
+        email = session["email"]
+
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+
+        flash(f"Successfully logged out. See you later, {current_user}!")
     else:
         return redirect(url_for("login"))
     session.pop("user", None) # pop session
@@ -172,28 +189,77 @@ def logout():
 # VIEW PAGE - views the database (including password)
 @app.route("/view", methods=["POST", "GET"])
 def view():
-    if "user" in session:
-        user = session["user"]
-        if user == "admin":
-            return render_template("view.html", values=users.query.all())
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+
+    if "email" in session:
+        email = session["email"]
+        if email == "admin@sus.com":
+            return render_template("view.html", user=current_user, values=users.query.all())
         else:
             return redirect(url_for("login"))
     else:
         return redirect(url_for("login"))
+
+
+@app.route("/change-password", methods=["POST", "GET"])
+def changePassword():
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+
+    if request.method == "POST":
+        current_email = users.query.filter(users.email == email).one()
+        current_password = current_email.password
+
+        oldpass = request.form["oldpass"]
+        newpassword = request.form["newpass"]
+        renewpassword = request.form["renewpass"]
+
+        if (oldpass == "") or (newpassword == "") or (renewpassword == ""):
+            flash("Please fill all entries.")
+            return render_template("change-password.html")
+        
+        elif current_password != oldpass:
+            flash("Old Password does not match with account's current password. Enter correct current password.")
+            return render_template("change-password.html")
+        else:
+            newpassword = request.form["newpass"]
+            renewpassword = request.form["renewpass"]
+            if newpassword != renewpassword:
+                flash("New password and retyped new password do not match.")
+                return render_template("change-password.html", user=current_user)
+            else:
+                current_email = users.query.filter(users.email == email).one()
+                current_email.password = newpassword
+                db.session.commit()
+                flash("Password successfuly changed.")
+                return redirect(url_for("logout"))
+    else:
+        return render_template("change-password.html", user=current_user)
+
     
 # USER PAGE
 @app.route("/user")
 def user():
     if "email" in session: # checking if "user" in dictionary has a value
-        user = session["user"]
         email = session["email"]
+
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+        current_id = current_email._id
         
         # found_email = users.query.filter_by(email=email).first()
         # fetch_user = users.query(users).one(found_email.user)
         # session["user"] = fetch_user.user
         # user = session["user"]
     
-        return render_template("user.html", user=user, email=email)
+        return render_template("user.html", user=current_user, email=email, id=current_id)
     else:
         return redirect(url_for("login"))
         
