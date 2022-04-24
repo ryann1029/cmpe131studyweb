@@ -34,22 +34,34 @@ class users(db.Model):
 @app.route("/") # "/" means default page. In this case, the homepage.
 @app.route("/home")
 def home():
-    return render_template("home.html") #using render_template so that it renders the content ot the HTML and does no not affect URL
+    user = None
+    if "user" in session:
+        user = session["user"]
+    return render_template("home.html", user=user) #using render_template so that it renders the content ot the HTML and does no not affect URL
 
 # GRADE CALCULATOR PAGE
 @app.route("/grade-calculator")
-def page1():
-    return render_template("grade-calculator.html")
+def calculator():
+    user = None
+    if "user" in session:
+        user = session["user"]
+    return render_template("grade-calculator.html", user=user)
 
 # CALENDAR PAGE
 @app.route("/calendar")
 def page2():
-    return render_template("calendar.html")
+    user = None
+    if "user" in session:
+        user = session["user"]
+    return render_template("calendar.html", user=user)
 
 # ABOUT US PAGE
 @app.route("/aboutus")
 def about_us():
-    return render_template("about_us.html")
+    user = None
+    if "user" in session:
+        user = session["user"]
+    return render_template("about_us.html", user=user)
 
 
 
@@ -60,7 +72,9 @@ def about_us():
 # SIGN UP PAGE
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
-    # found_email = None
+    if "user" in session:
+        return redirect(url_for("user"))
+
     if request.method == "POST":
         session.permanent = True         
         user = request.form["username"]
@@ -95,6 +109,10 @@ def signup():
 @app.route("/login", methods=["POST", "GET"])
 def login():
     message = Markup("Username or email does not exist. Please check your entries or <a href=\"signup\">sign up</a>.")
+    if "user" in session:
+        flash(Markup("You are current logged in. <a href=\"logout\">Sign out</a> to log in on another account."))
+        return redirect(url_for("user"))
+
     if request.method == "POST":
         session.permanent = True # enable/disable permanent session
         user = request.form["username"]
@@ -144,6 +162,8 @@ def logout():
     if "user" in session:
         user = session["user"]
         flash(f"Successfully logged out. See you later, {user}!")
+    else:
+        return redirect(url_for("login"))
     session.pop("user", None) # pop session
     session.pop("email", None)
     return redirect(url_for("login"))
@@ -208,6 +228,6 @@ if __name__ == "__main__":
     if found_email:
         pass
     else:
-        db.session.add(users("admin", "admin@sus.com", "adminpassiscuh!"))
+        db.session.add(users("Ryan", "admin@sus.com", "adminpassiscuh!"))
         db.session.commit()
     app.run(debug = True) # runs program. Every time you save any file, the new version will run.
