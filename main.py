@@ -80,7 +80,7 @@ def about_us():
 # SIGN UP PAGE
 @app.route("/signup", methods=["POST", "GET"])
 def signup():
-    if "user" in session:
+    if "email" in session:
         return redirect(url_for("user"))
 
     if request.method == "POST":
