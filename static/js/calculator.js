@@ -101,6 +101,7 @@ const calculate = () => {
     //console.log("ASSIGNMENT: " + /^[\w\d\s]+$/.test(assignment.value))
     if (assignment.value == "") {
       //assignment.value=="0";
+      console.log("assignment: " + assignment.value)
       document.querySelector("#showdata").innerHTML = `
      <div style="color: red;">Please enter all the fields.</div>
      `;
@@ -120,19 +121,82 @@ const calculate = () => {
       document.querySelector("#showdata").innerHTML = `
         <div style="color: red;">Please only include numbers for the weight.</div>
         `;
-    } else if (Number.isNaN(total_score_sum[0]) || Number.isNaN(total_points_possible[0])) {
+    } else if (!/^[0-9]+$/.test(temp_weight[1])) {
+
+      document.querySelector("#showdata").innerHTML = `
+        <div style="color: red;">Please only include numbers for the weight in column 2.</div>
+        `;
+    } else if (!/^[0-9]+$/.test(temp_weight[2])) {
+
+      document.querySelector("#showdata").innerHTML = `
+        <div style="color: red;">Please only include numbers for the weight in column 3.</div>
+        `;
+    } 
+    else if (!/^[0-9]+$/.test(temp_weight[3])) {
+
+      document.querySelector("#showdata").innerHTML = `
+        <div style="color: red;">Please only include numbers for the weight in column 4.</div>
+        `;
+    } 
+    else if (!/^[0-9]+$/.test(temp_weight[4])) {
+
+      document.querySelector("#showdata").innerHTML = `
+        <div style="color: red;">Please only include numbers for the weight in column 5.</div>
+        `;
+    } 
+    else if (Number.isNaN(total_score_sum[0]) || Number.isNaN(total_points_possible[0])) {
 
       console.log("score: " +total_score_sum[0])
       console.log("possible: " +total_points_possible[0])
       document.querySelector("#showdata").innerHTML = `
-     <div style="color: red;">Please make sure score and/or total point fields only contains numbers</div>
+     <div style="color: red;">Please make sure score and/or total point fields in column 1 only contains numbers</div>
      `;
 
-    }else { // when else statement is here, itll detect special characters but not weight
+    }
+    else if (Number.isNaN(total_score_sum[1]) || Number.isNaN(total_points_possible[1])) {
+      console.log("weight: " +weight.value)
+      console.log("score: " +total_score_sum[1])
+      console.log("possible: " +total_points_possible[1])
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">Please make sure score and/or total point fields in column 2 only contains numbers</div>
+     `;
+    }
+    else if (Number.isNaN(total_score_sum[2]) || Number.isNaN(total_points_possible[2])) {
+      console.log("weight: " +weight.value)
+      console.log("score: " +total_score_sum[2])
+      console.log("possible: " +total_points_possible[2])
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">Please make sure score and/or total point fields in column 3 only contains numbers</div>
+     `;
+    }
+    else if (Number.isNaN(total_score_sum[3]) || Number.isNaN(total_points_possible[3])) {
+      console.log("weight: " +weight.value)
+      console.log("score: " +total_score_sum[3])
+      console.log("possible: " +total_points_possible[3])
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">Please make sure score and/or total point fields in column 4 only contains numbers</div>
+     `;
+    }
+    else if (Number.isNaN(total_score_sum[4]) || Number.isNaN(total_points_possible[4])) {
+      console.log("weight: " +weight.value)
+      console.log("score: " +total_score_sum[4])
+      console.log("possible: " +total_points_possible[4])
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">Please make sure score and/or total point fields in column 5 only contains numbers</div>
+     `;
+    }
+    else if ((temp_weight[0]+temp_weight[1]+temp_weight[2]+temp_weight[3]+temp_weight[4])<100){
+      console.log("final weight: " +(temp_weight[0]+temp_weight[1]+temp_weight[2]+temp_weight[3]+temp_weight[4]))
+      document.querySelector("#showdata").innerHTML = `
+     <div style="color: red;">Please make sure total weight value is 100.</div>
+     `;
+    }
+    else { // when else statement is here, itll detect special characters but not weight
 
        
         // Checking the condition for the fail and pass
         if (percentage >= 70) {
+          console.log("final weight: " +(temp_weight[0]+temp_weight[1]+temp_weight[2]+temp_weight[3]+temp_weight[4]))
           document.querySelector("#showdata").innerHTML =
             `Your percentage is ${percentage}%.<br/> 
             <b>Your grade is a ${grades}, <u>a passing grade</u></b>.`;
