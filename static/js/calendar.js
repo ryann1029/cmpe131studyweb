@@ -2,7 +2,7 @@
 const renderCalendar = () => {
 const date = new Date();
 const month = ["January", "February", "March", "April", "May", "June",
-               "July","August","September","October","November","December",];
+               "July","August","September","October","November","December"];
 
 const monthDays = document.querySelector(".days");
 const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -11,7 +11,7 @@ const firstDayIndex = date.getDay();
 const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
 //
 document.querySelector(".date h").innerHTML = month[date.getMonth()];
-document.querySelector(".date p").innerHTML = new Date().toDateString();
+document.querySelector(".date p").innerHTML = date.toDateString();
 
 let days = " ";
 
