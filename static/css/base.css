@@ -80,7 +80,45 @@ table input {
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
     hyphens:manual;
-  }
+}
+
+#notes {
+    white-space: pre-wrap;
+}
+
+.flash-notif {
+    background-color: indigo;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+#timerNoDisplay {
+    -moz-animation: cssAnimation 0s ease-in 10s forwards; /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 10s forwards; /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 10s forwards; /* Opera */
+
+    animation: cssAnimation 0s ease-in 10s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        overflow: hidden;
+    }
+}
+
+@-webkit-keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        display: none;
+    }
+}
 
 /* .button {
     display: inline-block;
@@ -95,76 +133,80 @@ table input {
     line-height: 1.5;
     border-radius: 0.25rem;
 } */
-.calendar-class div{
+
+.calendar-class{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 85%;
-}
- 
-.container{
-    width: 100%;
-    height: 100vh;
-    /* background-color: #12121f; */
-    color:#eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.calendar{
-    width: 45rem;
-    height: 52rem;
-    background-color: #1b1a1a;
-    box-shadow: 0 0.5rem 3rem rgba(0,0,0,4);
+    font-family: "Quicksand", sans-serif;
 }
 
-.month{
+.container{
     width: 100%;
-    height: 12rem;
-    background-color: #2b0c0c;
+    /* height: 50vh; */
+    align-items: center;
+    display: flex;
+    justify-content: center ;
+    padding-top: 2rem;
+    padding-bottom: 30rem;
+
+}
+
+.calendar div{
+    width: 45rem;
+    /* height: 5rem; */
+    background-color: #853636;
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 4);
+}
+
+.month {
+    /* width: 100%;
+    height: 20rem; 
+    background-color: #e9f3ef; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    padding-bottom: 2rem; 
     text-align: center;
-    text-shadow: 0 0.3rem 0.5rem rgba(0,0,0,0.5);
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .month i{
+    width: 100%;
     font-size: 2.5rem;
     cursor: pointer;
-   
 }
-
 .month h{
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    box-shadow: none;
 }
+
 .month p{
     font-size: 1.6rem;
+    box-shadow: none;
 }
 
 .weekdays{
     width: 100%;
-    height: 5rem;
-    padding: 0 0.4rem;
+    height: .5rem;
+    padding: 0.4rem;
     display: flex;
     align-items: center;
 }
-
 .weekdays div{
     font-size: 1.5rem;
     font-weight: 400;
-    letter-spacing: 0.1rem;
+    letter-spacing: .2rem;
     width: calc(44.2rem/7);
     display: flex;
     justify-content: center;
     align-items: center;
-    text-shadow: 0 0.3rem 0.5rem rgba(0,0,0,0.5);
+    text-shadow:  0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 .days{
@@ -172,34 +214,21 @@ table input {
     display: flex;
     flex-wrap: wrap;
     padding: .2rem;
-    text-shadow: 0 0.3rem 0.5rem rgba(0,0,0,0.5);
 }
 
 .days div{
     font-size: 1.4rem;
-    margin: .3rem;
-    width: calc(40.2rem/7);
+    margin: 0.3rem;
+    width: calc(40.4rem/7);
     height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-shadow: 0 0.3rem 0.5rem rgba(0,0,0,0.5);
-    transition: background-color 0.2s;
+    text-shadow: 0 .03rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
-.days div:hover:not(.today){
-    background-color: #555;
-    border: 0.2rem solid #777;
-    cursor: pointer;
-}
 
-.prev-date, .next-date{
-    opacity: 50%;
-}
 
-.today{
-    background-color: #2b0c0c;
-}
 
 
 
