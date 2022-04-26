@@ -76,6 +76,12 @@ table input {
     border-style: hidden;
 }
 
+.of-wrap {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    hyphens:manual;
+  }
+
 /* .button {
     display: inline-block;
     font-weight: 400;

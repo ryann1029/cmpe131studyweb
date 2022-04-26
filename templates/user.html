@@ -15,7 +15,12 @@
         {% endif %}
     {% endwith %}
 
-<p><span class="highlight">Welcome, {{user}}!<br/>Email: {{email}}<br/>ID: #{{id}}</span></p>
+<div style="border: 2px white solid; width: auto; margin: 0.5em 0; padding: 0.25em;">
+    <span style="font-size:14pt;"><u>My Information</u></span><br/>Username: {{user}}!<br/>Email: {{email}}<br/>ID: #{{id}}</div>
+    <div style="border: 2px white solid; width: auto; margin: 0.5em 0; padding: 0.25em;"><span style="font-size:14pt;"><u>My Notes</u></span> <a href="notes"><i><span style="font-size:10pt;">edit notes <img style="vertical-align: baseline;" src="static\pictures\Pencil Icon.png" height="17px" width="17px"/></span></i></a>
+    <br/>
+    <div class="of-wrap">{{notes}}</div>
+</div>
 <form action="change-password">
     <p><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Change Password</button></p>
 </form>

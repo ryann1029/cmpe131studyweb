@@ -19,11 +19,14 @@ class users(db.Model):
     user = db.Column(db.String(100)) # name containing max 100 characters
     email = db.Column(db.String(100)) # email containing max 100 characters
     password = db.Column(db.String(100)) # email containing max 100 characters
+    notes = db.Column(db.String(100000))
 
-    def __init__(self, user, email, password):
+
+    def __init__(self, user, email, password, notes):
         self.user = user
         self.email = email
         self.password = password
+        self.notes = notes
 
 
 
@@ -114,7 +117,7 @@ def signup():
                 flash("Email already exists. Log in instead.")
             else:
                 # print("Email does not exists.")
-                db.session.add(users(user, email, password))
+                db.session.add(users(user, email, password, None))
                 db.session.commit()
 
                 flash("Signed up successful.")
@@ -167,44 +170,9 @@ def login():
             #     return render_template("login.html", user=user, email=email, password=password)
     else:
         return render_template("login.html")
-        
-
-# LOG OUT PAGE
-@app.route("/logout")
-def logout():
-    if "email" in session:
-        email = session["email"]
-
-        current_email = users.query.filter(users.email == email).one()
-        current_user = current_email.user
-
-        flash(f"Successfully logged out. See you later, {current_user}!")
-    else:
-        return redirect(url_for("login"))
-    session.pop("user", None) # pop session
-    session.pop("email", None)
-    return redirect(url_for("login"))
 
 
-# VIEW PAGE - views the database (including password)
-@app.route("/view", methods=["POST", "GET"])
-def view():
-    current_user = None
-    if "email" in session:
-        email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
-        current_user = current_email.user
-
-    if "email" in session:
-        email = session["email"]
-        if email == "admin@sus.com":
-            return render_template("view.html", user=current_user, values=users.query.all())
-        else:
-            return redirect(url_for("login"))
-    else:
-        return redirect(url_for("login"))
-
-
+# CHANGE PASSWORD PAGE
 @app.route("/change-password", methods=["POST", "GET"])
 def changePassword():
     current_user = None
@@ -242,24 +210,79 @@ def changePassword():
                 return redirect(url_for("logout"))
     else:
         return render_template("change-password.html", user=current_user)
+        
+
+# LOG OUT PAGE
+@app.route("/logout")
+def logout():
+    if "email" in session:
+        email = session["email"]
+
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+
+        flash(f"Successfully logged out. See you later, {current_user}!")
+    else:
+        return redirect(url_for("login"))
+    session.pop("user", None) # pop session
+    session.pop("email", None)
+    return redirect(url_for("login"))
+
+
+# VIEW PAGE - views the database (including password)
+@app.route("/view", methods=["POST", "GET"])
+def view():
+    current_user = None
+    if "email" in session:
+        email = session["email"] # admin@sus.com
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+
+    if "email" in session:
+        email = session["email"]
+        if email == "admin@sus.com":
+            return render_template("view.html", user=current_user, values=users.query.all())
+        else:
+            return redirect(url_for("login"))
+    else:
+        return redirect(url_for("login"))
+
+
 
     
 # USER PAGE
 @app.route("/user")
 def user():
-    if "email" in session: # checking if "user" in dictionary has a value
+    if "email" in session: # checking if "email" in dictionary has a value
         email = session["email"]
 
         current_email = users.query.filter(users.email == email).one()
         current_user = current_email.user
         current_id = current_email._id
-        
-        # found_email = users.query.filter_by(email=email).first()
-        # fetch_user = users.query(users).one(found_email.user)
-        # session["user"] = fetch_user.user
-        # user = session["user"]
+        current_notes = current_email.notes
     
-        return render_template("user.html", user=current_user, email=email, id=current_id)
+        return render_template("user.html", user=current_user, email=email, id=current_id, notes=current_notes)
+    else:
+        return redirect(url_for("login"))
+
+# EDITING NOTES PAGE
+@app.route("/notes", methods=["POST", "GET"])
+def editingNotes():
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = users.query.filter(users.email == email).one()
+        current_user = current_email.user
+        current_notes = current_email.notes
+
+        if request.method == "POST":
+            notes = request.form["notes"]
+            current_email.notes = notes
+            db.session.commit()
+            current_notes = current_email.notes # grab updated notes after commit
+            return render_template("notes.html", user=current_user, notes=current_notes)
+        else:
+            return render_template("notes.html", user=current_user, notes=current_notes)
     else:
         return redirect(url_for("login"))
         
@@ -294,6 +317,6 @@ if __name__ == "__main__":
     if found_email:
         pass
     else:
-        db.session.add(users("Ryan", "admin@sus.com", "adminpassiscuh!"))
+        db.session.add(users("Ryan", "admin@sus.com", "adminpassiscuh!", None))
         db.session.commit()
     app.run(debug = True) # runs program. Every time you save any file, the new version will run.
