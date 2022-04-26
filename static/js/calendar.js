@@ -13,7 +13,7 @@ const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
 document.querySelector(".date h").innerHTML = month[date.getMonth()];
 document.querySelector(".date p").innerHTML = new Date().toDateString();
 
-let days = "";
+let days = " ";
 
 //Added
 for (let x = firstDayIndex; x > 0; x--)
@@ -61,3 +61,4 @@ document.querySelector(".next").addEventListener("click", ()=>{
     renderCalendar();
 });
 renderCalendar();
+
