@@ -40,7 +40,7 @@ const calculate = () => {
 
   let total_grade_points = 0;
 
-  for (var i = 0; i < CalcTable.rows.length; ++i) {
+  for (var i = 0; i < CalcTable.rows.length - 1; ++i) {
     for (var k = 0; k < CalcTable.rows[i].cells.length && i == 0; ++k) {
       column_counter++;
       var row_weight = CalcTable.rows[i].cells[k];
