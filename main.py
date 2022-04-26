@@ -283,7 +283,7 @@ def editingNotes():
             current_email.notes = notes
             db.session.commit()
             current_notes = current_email.notes # grab updated notes after commit
-            flash("Notes saved.")
+            flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Notes saved.</span>"))
             return redirect(url_for("user"))
         else:
             return render_template("notes.html", user=current_user, notes=current_notes)
