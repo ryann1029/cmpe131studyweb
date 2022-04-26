@@ -11,52 +11,13 @@ Assigned to Ryan only -->
         <title>Big Daddy's Test Page</title>
     </head>
 
-    <body>
-        <table id="dataTable" border="1">
-            <!-- <thead> -->
-                <tr>
-                    <th>Course 1 <input style="position: relative; float: right;" type="text" placeholder="Weight" id="weight"/></th>
-                </tr>
-            <!-- </thead> -->
-            
-            <!-- <tbody> -->
-                <tr id="firstBodyRow">
-                    <td>
-                        <input type="text" placeholder="Assignment Name" id="assignment"/>
-                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
-                        <input type="text" style="width: 100px;" placeholder="Total Points" id="totalpoints"/>
-                        <br/>
-                        <button class="deleteBtn">Delete</button>
-                    </td>
-                    <!-- <td><INPUT type="text" name="text1"/></td> -->
-                    <!-- <td> <INPUT type="text" placeholder="Text0"/></td> -->
-                </tr>
-            <!-- </tbody> -->
-        </table>
-
-        <input type="button" value="+ Add Row" id="addRow"/> <!-- onclick="addRow('dataTable')" -->
-        <input type="button" value="+ Add Column" id="addColumn" /> <!-- onclick="addColumn('dataTable')" -->
-        <div style="position: relative; float: right;">
-            <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
-            <input type="button" value="Row Count" class="form-button" onclick="rowCount('dataTable')"/></td>
-            <input type="button" value="Column Count" class="form-button" onclick="columnCount('dataTable')"/></td>
+    <body onload=realTimeDisplay();>
+        <div class="timedisplay">
+            <span>Output: <p id="timedisplay"></p></span>
         </div>
-
-        <div class="form-group showdata">
-            <span>Results: <p id="showdata"></p></span>
-        </div>
-
-        <div class="form-group showdata">
-            <span>Row Count: <p id="rowCount"></p></span>
-        </div>
-
-        <div class="form-group showdata">
-            <span>Column Count: <p id="columnCount"></p></span>
-        </div>
-
+        <!-- <input type="button" value="Display Time" class="form-button" onclick="realTimeDisplay()"/> -->
     </body>
 
-    <script src="static\js\calculator.js"></script>
-	<script src="static\js\tableManipulationTest.js"></script>
+    <script src="static\js\timeDisplay.js"></script>
 </html>
 {% endblock %}
