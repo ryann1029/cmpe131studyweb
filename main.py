@@ -102,11 +102,11 @@ def signup():
             if email != "":
                 email1 = email
 
-            flash("Please fill all entries.")
+            flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Please fill all entries.</span>"))
             return render_template("signup.html", special_user=user1, special_email=email1)
 
         if password != repassword:
-            flash("Password does not match. Please retry sign up again.")
+            flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Password does not match. Please retry sign up again.</span>"))
             return render_template("signup.html", special_user=user1, special_email=email1)
 
         else:
@@ -114,13 +114,13 @@ def signup():
 
             if found_email:
                 # session["email"] = email # storing value of user in the dictionary.
-                flash("Email already exists. Log in instead.")
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Email already exists. Log in instead.</span>"))
             else:
                 # print("Email does not exists.")
                 db.session.add(users(user, email, password, None))
                 db.session.commit()
 
-                flash("Signed up successful.")
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Signed up successful.</span>"))
             return redirect(url_for("login"))
     else:
         return render_template("signup.html")
@@ -129,9 +129,9 @@ def signup():
 # LOG IN PAGE
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    message = Markup("Username or email does not exist. Please check your entries or <a href=\"signup\">sign up</a>.")
+    message = Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Username or email does not exist. Please check your entries or <a href=\"signup\">sign up</a>.</span>")
     if "email" in session:
-        flash(Markup("You are current logged in. <a href=\"logout\">Sign out</a> to log in on another account."))
+        flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">You are current logged in. <a href=\"logout\">Sign out</a> to log in on another account.</span>"))
         return redirect(url_for("user"))
 
     if request.method == "POST":
@@ -147,7 +147,7 @@ def login():
                 email1 = email
             if password != "":
                 password1 = password
-            flash("Please fill all entries.")
+            flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Please fill all entries.</span>"))
             return render_template("login.html", email=email1, password=password1)
         
         else:
@@ -157,10 +157,10 @@ def login():
                 if email_password_match:
                     session["email"] = email # storing value of email in the dictionary.
                     
-                    flash("Logged in sucessfully!")
+                    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Logged in sucessfully!</span>"))
                     return redirect(url_for("user"))
                 else:
-                    flash("Password does not match.")
+                    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Password does not match.</span>"))
                     return render_template("login.html", email=email, password=password)
             else:
                 flash(message)
@@ -190,23 +190,23 @@ def changePassword():
         renewpassword = request.form["renewpass"]
 
         if (oldpass == "") or (newpassword == "") or (renewpassword == ""):
-            flash("Please fill all entries.")
+            flash("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Please fill all entries.</span>")
             return render_template("change-password.html")
         
         elif current_password != oldpass:
-            flash("Old Password does not match with account's current password. Enter correct current password.")
+            flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Old Password does not match with account's current password. Enter correct current password.</span>"))
             return render_template("change-password.html")
         else:
             newpassword = request.form["newpass"]
             renewpassword = request.form["renewpass"]
             if newpassword != renewpassword:
-                flash("New password and retyped new password do not match.")
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">New password and retyped new password do not match.</span>"))
                 return render_template("change-password.html", user=current_user)
             else:
                 current_email = users.query.filter(users.email == email).one()
                 current_email.password = newpassword
                 db.session.commit()
-                flash("Password successfuly changed.")
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Password successfully changed.</span>"))
                 return redirect(url_for("logout"))
     else:
         return render_template("change-password.html", user=current_user)
@@ -221,7 +221,7 @@ def logout():
         current_email = users.query.filter(users.email == email).one()
         current_user = current_email.user
 
-        flash(f"Successfully logged out. See you later, {current_user}!")
+        flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Successfully logged out. See you later, ") + f"{current_user}!" + Markup("</span>"))
     else:
         return redirect(url_for("login"))
     session.pop("user", None) # pop session
@@ -260,6 +260,9 @@ def user():
         current_user = current_email.user
         current_id = current_email._id
         current_notes = current_email.notes
+
+        if current_notes == "":
+            current_notes = "No Notes."
     
         return render_template("user.html", user=current_user, email=email, id=current_id, notes=current_notes)
     else:
@@ -280,7 +283,8 @@ def editingNotes():
             current_email.notes = notes
             db.session.commit()
             current_notes = current_email.notes # grab updated notes after commit
-            return render_template("notes.html", user=current_user, notes=current_notes)
+            flash("Notes saved.")
+            return redirect(url_for("user"))
         else:
             return render_template("notes.html", user=current_user, notes=current_notes)
     else:
@@ -317,6 +321,6 @@ if __name__ == "__main__":
     if found_email:
         pass
     else:
-        db.session.add(users("Ryan", "admin@sus.com", "adminpassiscuh!", None))
+        db.session.add(users("Ryan", "admin@sus.com", "pass123", None))
         db.session.commit()
     app.run(debug = True) # runs program. Every time you save any file, the new version will run.

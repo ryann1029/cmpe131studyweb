@@ -6,6 +6,13 @@
 <head>
     <title>Log In | Study University Scholar</title>
 </head>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="flash-notif" id="timerNoDisplay">{{msg}}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 <form action="#" method="post" style="text-align: center">
     <!-- <p><input type="text" name="username" placeholder="Username" value="{{user if user}}"/></p> -->
     <p>Email<br/><input style="width: 25%;" type="email" name="email" placeholder="Email" value="{{email if email}}"/></p>
@@ -13,11 +20,4 @@
     <p><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log In</button></p>
 </form>
     <center><p><a href="signup"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</button></a></p></center>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <center><div style="color: red">{{msg}}</div></center>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 {% endblock %}
