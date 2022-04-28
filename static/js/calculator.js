@@ -1,20 +1,22 @@
 const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect any letters.
 
-/*function CheckAssignmentCondition(assignment, row_number) {
-  if (assignment.value == "") { //changed from assignment to assignment.val
-    document.querySelector("#showdata").innerHTML = `
-    <div style="color: red;">Please enter all the fields in row ${row_number}.</div>
-    `;
-    process.exit(1);
-  }
+// function CheckAssignmentCondition(assignment, row_number) {
+//   if (assignment.value == "") { //changed from assignment to assignment.val
+//     document.querySelector("#showdata").innerHTML = `
+//     <div style="color: red;">Please enter all the fields in row ${row_number}.</div>
+//     `;
+//     process.exit(1);
+//   }
 
-  if (!/^[\w\d\s]+$/.test(assignment.value)) { // changed from assignment to assignment.val
-    document.querySelector("#showdata").innerHTML = `
-    <div style="color: red;">No special characters are allowed for course name in row ${row_number}. Correct your inputs.</div>
-    `;
-    process.exit(1);
-  }
-}*/
+//   if (!/^[\w\d\s]+$/.test(assignment.value)) { // changed from assignment to assignment.val
+//     document.querySelector("#showdata").innerHTML = `
+//     <div style="color: red;">No special characters are allowed for course name in row ${row_number}. Correct your inputs.</div>
+//     `;
+//     process.exit(1);
+//   }
+
+ 
+// }
 
 const calculate = () => {
 
@@ -28,6 +30,7 @@ const calculate = () => {
   let weighted_grade_points = [0, 0, 0, 0, 0];
   let temp_weight = [0, 0, 0, 0, 0]
   column_counter = 0;
+  let data_table = ['dataTable1', 'dataTable2', 'dataTable3', 'dataTable4', 'dataTable5']
 
   // this should calculate the total weight, if it is less than 100 after the for loop, terminate 
   // and let the user know the total weight should sum to 100 or greater. 
@@ -36,38 +39,66 @@ const calculate = () => {
   //let total_points_sum = 0;
  
 
-  let CalcTable = document.getElementById('dataTable');
+  var boundary_temp = 0; 
+  // check the weight first and get the column count
+  for (var i = 0; i < 5; ++i){
+    var Table = document.getElementById(data_table[i]); 
+    var row_weight = Table.rows[0].cells[0];  
+    boundary_temp += parseFloat(row_weight.querySelector("#weight").value); 
+    temp_weight[i] = parseFloat(row_weight.querySelector("#weight").value); 
+    weighted_grade_points[i] += parseFloat(row_weight.querySelector("#weight").value)
+    ++column_counter; 
+    if (boundary_temp >= 100){
+      break; 
+    }
+  }
+
+  for (var i = 0; i < column_counter; ++i){
+    var Table = document.getElementById(data_table[i]); 
+    for (var j = 0; j < Table.rows.length - 1; ++j){
+      if (j == 0){
+        continue; 
+      }
+      var row = Table.rows[j].cells[0]; 
+      total_score_sum[i] += parseFloat(row.querySelector("#score").value); 
+      total_points_possible[i] += parseFloat(row.querySelector("#pointspossible").value); 
+    }
+  }
+
+
+  
+
+  // let CalcTable = document.getElementById('dataTable');
 
   let total_grade_points = 0;
 
-  for (var i = 0; i < CalcTable.rows.length; ++i) {
-    for (var k = 0; k < CalcTable.rows[i].cells.length && i == 0; ++k) {
-      column_counter++;
-      var row_weight = CalcTable.rows[i].cells[k];
-      temp_weight[k] = parseFloat(row_weight.querySelector("#weight").value);
-    }
-    for (var j = 0; j < CalcTable.rows[i].cells.length; ++j) {
-      if (i == 0){
-        continue;
-      }
+  // for (var i = 0; i < CalcTable.rows.length; ++i) {
+  //   for (var k = 0; k < CalcTable.rows[i].cells.length && i == 0; ++k) {
+  //     column_counter++;
+  //     var row_weight = CalcTable.rows[i].cells[k];
+  //     temp_weight[k] = parseFloat(row_weight.querySelector("#weight").value);
+  //   }
+  //   for (var j = 0; j < CalcTable.rows[i].cells.length; ++j) {
+  //     if (i == 0){
+  //       continue;
+  //     }
         
-      var row = CalcTable.rows[i].cells[j];
+  //     var row = CalcTable.rows[i].cells[j];
 
-      console.log("TEST: "+ row.querySelector("#score").value)
-
-    
-      total_score_sum[j] += parseFloat(row.querySelector("#score").value);
-      total_points_possible[j] += parseFloat(row.querySelector("#pointspossible").value);
-    }
+  //     console.log("TEST: "+ row.querySelector("#score").value)
 
     
-  }
+  //     total_score_sum[j] += parseFloat(row.querySelector("#score").value);
+  //     total_points_possible[j] += parseFloat(row.querySelector("#pointspossible").value);
+  //   }
+
+    
+  // }
 
   
 
   for (var i = 0; i < column_counter; ++i) {
     weighted_grade_points[i] = (total_score_sum[i] / total_points_possible[i]) * temp_weight[i];
-    console.log(weighted_grade_points[0]);
     total_grade_points += weighted_grade_points[i];
   }
 
@@ -75,7 +106,7 @@ const calculate = () => {
   // let grade_sum = column_points[0]; 
 
   let percentage = total_grade_points;
-
+  console.log(percentage); 
 
   // checking to see if the user added a correct value for weight 
   if (total_weight < 0 || total_weight > 100) {
@@ -185,7 +216,7 @@ const calculate = () => {
      <div style="color: red;">Please make sure score and/or total point fields in column 5 only contains numbers</div>
      `;
     }
-    else if ((temp_weight[0]+temp_weight[1]+temp_weight[2]+temp_weight[3]+temp_weight[4])<100){
+    else if ((boundary_temp)<100){
       console.log("final weight: " +(temp_weight[0]+temp_weight[1]+temp_weight[2]+temp_weight[3]+temp_weight[4]))
       document.querySelector("#showdata").innerHTML = `
      <div style="color: red;">Please make sure total weight value is 100.</div>
