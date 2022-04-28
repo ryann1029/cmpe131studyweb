@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <table id="dataTable" border="1">
+        <table id="dataTable1" border="1" style="float: left;">
             <!-- <thead> -->
                 <tr>
                     <th>Category 1 <input style="position: relative; float: right; width: 70px" type="text" placeholder="Weight (%)" id="weight"/></th>
@@ -20,40 +20,140 @@
             <!-- <tbody> -->
                 <tr id="firstBodyRow">
                     <td>
-                        <input type="text" style="width: 120px;" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Assignment Name" id="assignment"/>
                         <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
                         <input type="text" style="width: 95px;" placeholder="Points Possible" id="pointspossible"/>
                     </td>
                 </tr>
                 
-                <tr id="buttonChoices">
+                <tfoot id="buttonChoices">
                     <td>
-                    <input type="button" value="- Delete Row" onclick="deleteRow()"/>
-                    <input type="button" value="+ Add Row" onclick="addRow()" id="row"/>
-                    <input type="button" value="+Add Column" onclick="addColumn()"/>
+                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable1')"/>
+                    <input type="button" value="+ Add Row" onclick="addRow('dataTable1')" id="row"/>
                     </td>
-                </tr>
+                </tfoot>
             <!-- </tbody> -->
         </table>
 
-        <!-- <input type="button" value="+ Add Column" id="addColumn" /> -->
+        <table id="dataTable2" border="1" style="float: left;">
+            <!-- <thead> -->
+                <tr>
+                    <th>Category 2 <input style="position: relative; float: right; width: 70px" type="text" placeholder="Weight (%)" id="weight"/></th>
+                </tr>
+            <!-- </thead> -->
+            
+            <!-- <tbody> -->
+                <tr id="firstBodyRow">
+                    <td>
+                        <input type="text" style="width: 100px;" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
+                        <input type="text" style="width: 95px;" placeholder="Points Possible" id="pointspossible"/>
+                    </td>
+                </tr>
+                
+                <tfoot id="buttonChoices">
+                    <td>
+                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable2')"/>
+                    <input type="button" value="+ Add Row" onclick="addRow('dataTable2')" id="row"/>
+                    </td>
+                </tfoot>
+            <!-- </tbody> -->
+        </table>
+
+        <table id="dataTable3" border="1" style="float: left;">
+            <!-- <thead> -->
+                <tr>
+                    <th>Category 3 <input style="position: relative; float: right; width: 70px" type="text" placeholder="Weight (%)" id="weight"/></th>
+                </tr>
+            <!-- </thead> -->
+            
+            <!-- <tbody> -->
+                <tr id="firstBodyRow">
+                    <td>
+                        <input type="text" style="width: 100px;" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
+                        <input type="text" style="width: 95px;" placeholder="Points Possible" id="pointspossible"/>
+                    </td>
+                </tr>
+                
+                <tfoot id="buttonChoices">
+                    <td>
+                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable3')"/>
+                    <input type="button" value="+ Add Row" onclick="addRow('dataTable3')" id="row"/>
+                    </td>
+                </tfoot>
+            <!-- </tbody> -->
+        </table>
+
+        <table id="dataTable4" border="1" style="float: left;">
+            <!-- <thead> -->
+                <tr>
+                    <th>Category 4 <input style="position: relative; float: right; width: 70px" type="text" placeholder="Weight (%)" id="weight"/></th>
+                </tr>
+            <!-- </thead> -->
+            
+            <!-- <tbody> -->
+                <tr id="firstBodyRow">
+                    <td>
+                        <input type="text" style="width: 100px;" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
+                        <input type="text" style="width: 95px;" placeholder="Points Possible" id="pointspossible"/>
+                    </td>
+                </tr>
+                
+                <tfoot id="buttonChoices">
+                    <td>
+                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable4')"/>
+                    <input type="button" value="+ Add Row" onclick="addRow('dataTable4')" id="row"/>
+                    </td>
+                </tfoot>
+            <!-- </tbody> -->
+        </table>
+
+        <table id="dataTable5" border="1" style="float: left;">
+            <!-- <thead> -->
+                <tr>
+                    <th>Category 5 <input style="position: relative; float: right; width: 70px" type="text" placeholder="Weight (%)" id="weight"/></th>
+                </tr>
+            <!-- </thead> -->
+            
+            <!-- <tbody> -->
+                <tr id="firstBodyRow">
+                    <td>
+                        <input type="text" style="width: 100px;" placeholder="Assignment Name" id="assignment"/>
+                        <input type="text" style="width: 100px;" placeholder="Score" id="score"/>
+                        <input type="text" style="width: 95px;" placeholder="Points Possible" id="pointspossible"/>
+                    </td>
+                </tr>
+                
+                <tfoot id="buttonChoices">
+                    <td>
+                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable5')"/>
+                    <input type="button" value="+ Add Row" onclick="addRow('dataTable5')" id="row"/>
+                    </td>
+                </tfoot>
+            <!-- </tbody> -->
+        </table>
+        
+    <br clear="all"/>
+    <!-- <input type="button" value="+ Add Column" id="addColumn" /> -->
         <div style="position: relative; float: right;">
-            <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
-            <input type="button" value="Row Count" class="form-button" onclick="rowCount('dataTable')"/></td>
-            <input type="button" value="Column Count" class="form-button" onclick="columnCount('dataTable')"/></td>
-        </div>
+        <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
+        <input type="button" value="Row Count" class="form-button" onclick="rowCount('dataTable')"/></td>
+        <!-- <input type="button" value="Column Count" class="form-button" onclick="columnCount('dataTable')"/></td> -->
+    </div> 
 
-        <div class="form-group showdata">
-            <span>Results: <p id="showdata"></p></span>
-        </div>
+    <div class="form-group showdata">
+        <span>Results: <p id="showdata"></p></span>
+    </div>
 
-        <div class="form-group showdata">
-            <span>Row Count: <p id="rowCount"></p></span>
-        </div>
+    <div class="form-group showdata">
+        <span>Row Count: <p id="rowCount"></p></span>
+    </div>
 
-        <div class="form-group showdata">
-            <span>Column Count: <p id="columnCount"></p></span>
-        </div>
+    <div class="form-group showdata">
+        <span>Column Count: <p id="columnCount"></p></span>
+    </div>
     </body>
 
     <script src="static\js\calculator.js"></script>
