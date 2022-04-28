@@ -71,7 +71,7 @@ table input {
     font-size: 9pt !important;
 }
 
-.force-border-remove { 
+.force-border-remove td{ 
     border-collapse: collapse;
     border-style: hidden;
 }
@@ -140,9 +140,9 @@ table input {
     margin-left: -13%;
     box-sizing: border-box;
     font-family: "Quicksand", sans-serif;
-    position: relative;
+    /* position: relative;
     display: flex;
-    resize: none;
+    resize: none; */
 }
 
 .container{
@@ -308,6 +308,7 @@ table input {
     float:right;
     cursor:pointer;
   }
+  
 
 
 
@@ -371,7 +372,18 @@ table input {
 
 }
 
-
+@media screen and (min-width: 2160px) {
+    .calendar-class{
+        margin: 0;
+        padding: 0;
+        /* margin-left: -13%; */
+        box-sizing: border-box;
+        font-family: "Quicksand", sans-serif;
+        /* position: relative;
+        display: flex;
+        resize: none; */
+    }
+}
 
 
 

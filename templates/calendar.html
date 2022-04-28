@@ -19,43 +19,49 @@
 
     </head>
         <body>
-            <div class="calendar-class">
-                <div class="container">
-                    <div class="calendar">
-                        <div class="month">
-                            <i class="fas fa-angle-left prev"> </i>
-                            <div class="date">
-                                <h></h>
-                                <p></p>
-                            </div>
-                            <i class="fas fa-angle-right next"> </i>
-                        </div>
-                            <div class="weekdays">
-                                <div>Sun</div>
-                                <div>Mon</div>
-                                <div>Tue</div>
-                                <div>Wed</div>
-                                <div>Thu</div>
-                                <div>Fri</div>
-                                <div>Sat</div>
-                            </div>
-                            <div class="days"> 
+            <tr>
+                <td class="force-border-remove" style="table-layout:fixed;" >
+                    <div class="calendar-class">
+                        <div class="container">
+                            <div class="calendar">
+                                <div class="month">
+                                    <i class="fas fa-angle-left prev"> </i>
+                                    <div class="date">
+                                        <h></h>
+                                        <p></p>
+                                    </div>
+                                    <i class="fas fa-angle-right next"> </i>
+                                </div>
+                                    <div class="weekdays">
+                                        <div>Sun</div>
+                                        <div>Mon</div>
+                                        <div>Tue</div>
+                                        <div>Wed</div>
+                                        <div>Thu</div>
+                                        <div>Fri</div>
+                                        <div>Sat</div>
+                                    </div>
+                                    <div class="days"> 
+                                        
+                                    </div>
+                                    
                                 
                             </div>
-                            
-                        
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class ="reminders">
-                <h2>Reminders</h2>
-                <section>
-                    <input type=text autofocus>
-                    <input type=button value=+ onClick=reminders.create(input.value)>
-                </section>
-            </div>
+                </td>
+                <td class="force-border-remove">
+                    <div class ="reminders">
+                        <h2>Reminders</h2>
+                        <section>
+                            <input type=text autofocus>
+                            <input type=button value=+ onClick=reminders.create(input.value)>
+                        </section>
+                    </div>
+                </td>
+            </tr>
         </body>
         <script src="static\js\calendar.js"></script>  
+        <script scr="statik\js\reminders.js"></script>
 </html>
 {% endblock %}
