@@ -150,29 +150,29 @@ const calculate = () => {
     } else if (!/^[0-9]+$/.test(weight.value)) {
 
       document.querySelector("#showdata").innerHTML = `
-        <div style="color: red;">Please only include numbers for the weight.</div>
+        <div style="color: red;">Please include valid numbers for the weight.</div>
         `;
     } else if (!/^[0-9]+$/.test(temp_weight[1])) {
 
       document.querySelector("#showdata").innerHTML = `
-        <div style="color: red;">Please only include numbers for the weight in column 2.</div>
+        <div style="color: red;">Please include valid numbers for the weight in column 2.</div>
         `;
     } else if (!/^[0-9]+$/.test(temp_weight[2])) {
 
       document.querySelector("#showdata").innerHTML = `
-        <div style="color: red;">Please only include numbers for the weight in column 3.</div>
+        <div style="color: red;">Please include valid numbers for the weight in column 3.</div>
         `;
     } 
     else if (!/^[0-9]+$/.test(temp_weight[3])) {
 
       document.querySelector("#showdata").innerHTML = `
-        <div style="color: red;">Please only include numbers for the weight in column 4.</div>
+        <div style="color: red;">Please include valid numbers for the weight in column 4.</div>
         `;
     } 
     else if (!/^[0-9]+$/.test(temp_weight[4])) {
 
       document.querySelector("#showdata").innerHTML = `
-        <div style="color: red;">Please only include numbers for the weight in column 5.</div>
+        <div style="color: red;">Please include valid numbers for the weight in column 5.</div>
         `;
     } 
     else if (Number.isNaN(total_score_sum[0]) || Number.isNaN(total_points_possible[0])) {
