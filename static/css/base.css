@@ -137,6 +137,7 @@ table input {
 .calendar-class{
     margin: 0;
     padding: 0;
+    margin-left: -15%;
     box-sizing: border-box;
     font-family: "Quicksand", sans-serif;
 }
@@ -384,6 +385,13 @@ table input {
     /* Fully hide mobile navigation bar on tablet view */
     .slicknav_menu {
         display: none !important;
+    }
+
+    .calendar-class{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Quicksand", sans-serif;
     }
 }
 
