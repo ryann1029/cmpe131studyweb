@@ -1,23 +1,5 @@
 const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect any letters.
 
-// function CheckAssignmentCondition(assignment, row_number) {
-//   if (assignment.value == "") { //changed from assignment to assignment.val
-//     document.querySelector("#showdata").innerHTML = `
-//     <div style="color: red;">Please enter all the fields in row ${row_number}.</div>
-//     `;
-//     process.exit(1);
-//   }
-
-//   if (!/^[\w\d\s]+$/.test(assignment.value)) { // changed from assignment to assignment.val
-//     document.querySelector("#showdata").innerHTML = `
-//     <div style="color: red;">No special characters are allowed for course name in row ${row_number}. Correct your inputs.</div>
-//     `;
-//     process.exit(1);
-//   }
-
- 
-// }
-
 const calculate = () => {
 
   // Getting input from user into height variable
@@ -72,29 +54,6 @@ const calculate = () => {
 
   let total_grade_points = 0;
 
-  // for (var i = 0; i < CalcTable.rows.length; ++i) {
-  //   for (var k = 0; k < CalcTable.rows[i].cells.length && i == 0; ++k) {
-  //     column_counter++;
-  //     var row_weight = CalcTable.rows[i].cells[k];
-  //     temp_weight[k] = parseFloat(row_weight.querySelector("#weight").value);
-  //   }
-  //   for (var j = 0; j < CalcTable.rows[i].cells.length; ++j) {
-  //     if (i == 0){
-  //       continue;
-  //     }
-        
-  //     var row = CalcTable.rows[i].cells[j];
-
-  //     console.log("TEST: "+ row.querySelector("#score").value)
-
-    
-  //     total_score_sum[j] += parseFloat(row.querySelector("#score").value);
-  //     total_points_possible[j] += parseFloat(row.querySelector("#pointspossible").value);
-  //   }
-
-    
-  // }
-
   
 
   for (var i = 0; i < column_counter; ++i) {
@@ -102,8 +61,6 @@ const calculate = () => {
     total_grade_points += weighted_grade_points[i];
   }
 
-  //console.log("HERE: " +temp_weight[0]); 
-  // let grade_sum = column_points[0]; 
 
   let percentage = total_grade_points;
   console.log(percentage); 
