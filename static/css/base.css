@@ -137,9 +137,12 @@ table input {
 .calendar-class{
     margin: 0;
     padding: 0;
-    margin-left: -15%;
+    margin-left: -13%;
     box-sizing: border-box;
     font-family: "Quicksand", sans-serif;
+    position: relative;
+    display: flex;
+    resize: none;
 }
 
 .container{
@@ -262,6 +265,7 @@ table input {
 
 .reminders h2{
     text-decoration: underline;
+    text-transform: uppercase;
     margin-left: 73%;
     margin-top: -65%;
     margin-bottom: 65%;
@@ -292,8 +296,8 @@ table input {
     margin:0 0 15px 0;
     margin-bottom: 150%;
     border:1px solid white;
-    background:#555;
-    color:white;
+    background:#333;
+    color: green;
     border-radius:1px;
     padding:5px;
     font-size: 19pt;
