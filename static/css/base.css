@@ -188,6 +188,7 @@ table input {
 }
 
 .month i{
+    padding: 0% 5% 0%;
     font-size: 2.5rem;
     cursor: pointer;
    
