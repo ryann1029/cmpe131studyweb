@@ -14,10 +14,6 @@
         {% if item.user_id == id %}
             <div>Key: {{item.key}}<br/>Value:{{item.value}}<br/>User ID: {{item.user_id}}</div>
             <hr/>
-        {% else %}
-            <div>Key: <span style="color: red">[ REDACTED ]</span><br/>Value: <span style="color: red">[ REDACTED ]</span><br/>
-            User ID: <span style="color: red">[ REDACTED ]</span></div>
-            <hr/>
         {% endblock %}
         {% endif %}
     {% endfor %}
