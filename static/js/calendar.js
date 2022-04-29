@@ -17,8 +17,8 @@ const renderCalendar = () => {
 
     const nextDays = 42 - (lastDay + firstDayIndex)
 
-    document.querySelector(".date h").innerHTML = month[date.getMonth()];
-    document.querySelector(".date p").innerHTML = new Date().toDateString();
+    document.querySelector(".date h").innerHTML = month[date.getMonth()] + " " + date.getFullYear(); 
+    document.querySelector(".date p").innerHTML = "Current Date: " + new Date().toDateString();
    
     let days = ""; 
 
@@ -44,6 +44,12 @@ const renderCalendar = () => {
     }
     }
     
+    removeCountSign = 0; 
+
+    document.querySelector('.days').addEventListener('click', () => {
+        addReminder(); 
+    })
+
     document.querySelector('.prev').addEventListener('click', () => {
         date.setMonth(date.getMonth() - 1); 
         renderCalendar(); 
@@ -54,3 +60,26 @@ const renderCalendar = () => {
         renderCalendar(); 
     })
     renderCalendar();
+
+    const addReminder = () => {
+        var tag = document.createElement("section"); 
+        tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder"/>
+        <input type="date"/>
+        <input type=button value=+ onclick="addReminder()" id="Add"/>`; 
+
+    
+        var reminderSection = document.getElementById("reminders2"); 
+        reminderSection.appendChild(tag);
+        AddRemoveSign(); 
+        
+     }
+
+     const AddRemoveSign = () => {
+        var reminderSet = document.getElementById('reminders2'); 
+        var section = reminderSet.getElementsByTagName('section'); 
+        for (var i = removeCountSign; i < section.length; ++i){
+            var subSection = section[i].lastElementChild.tagName; 
+            console.log(subSection.innerHTML); 
+            
+        }
+     }

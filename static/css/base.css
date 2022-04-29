@@ -287,13 +287,13 @@ details {
     text-decoration: underline;
     text-transform: uppercase;
     margin-left: 73%;
-    margin-top: -65%;
+    margin-top: -53%;
     margin-bottom: 65%;
 }
 
 .reminders section{
     margin-left: 60%;
-    margin-top: -63%;
+    margin-top: -65%;
     margin-bottom: 65%;
 }
 
@@ -312,9 +312,9 @@ details {
     cursor:pointer;
   }
 
-  .reminders section input[type=button] {
+  .reminders #Add{
     margin:0 0 15px 0;
-    margin-bottom: 150%;
+    margin-bottom: 0%;
     border:1px solid white;
     background:#333;
     color: green;
@@ -327,6 +327,23 @@ details {
     width:35px;
     float:right;
     cursor:pointer;
+  }
+
+  .reminders #Remove{
+      margin: 0 0 15px 0; 
+      margin-bottom: 0%; 
+      border: 1px solid white; 
+      background: #333; 
+      color: red;
+      border-radius:1px;
+      padding:5px;
+      font-size: 19pt;
+      line-height:1;
+      font-weight:bold;
+      outline:none;
+      width:35px;
+      float:right;
+      cursor:pointer;
   }
 
 /**************** 2) DESKTOP VIEW ****************/
@@ -469,7 +486,7 @@ It will look normal on 1080p, 1440p, and 4k monitors */
         text-decoration: underline;
         text-transform: uppercase;
         margin-left: 36%;
-        margin-top: 0%;
+        margin-top: 10%;
         margin-bottom: 65%;
     }
     .reminders section{
