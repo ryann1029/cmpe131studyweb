@@ -54,3 +54,26 @@ const renderCalendar = () => {
         renderCalendar(); 
     })
     renderCalendar();
+
+    const addReminder = () => {
+        var tag = document.createElement("section"); 
+        tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder">
+        <input type="date"/>
+        <input type=button value=+ onclick="addReminder()">`; 
+
+        console.log(tag.innerHTML);
+    
+        var reminderSection = document.getElementById("reminders2"); 
+        reminderSection.appendChild(tag); 
+        getDate(); 
+    }
+
+    const  getDate = () => {
+        var remin = document.getElementById("reminders2"); 
+        var section = remin.getElementsByTagName("section"); 
+        var sectionCount = 0; 
+        for (var i = 0; i < section.length; ++i){
+            let date = section.getAttribute("date"); 
+            console.log(date); 
+        }
+    }
