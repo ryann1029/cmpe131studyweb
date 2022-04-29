@@ -44,6 +44,8 @@ const renderCalendar = () => {
     }
     }
     
+    removeCountSign = 0; 
+
     document.querySelector('.days').addEventListener('click', () => {
         addReminder(); 
     })
@@ -61,19 +63,23 @@ const renderCalendar = () => {
 
     const addReminder = () => {
         var tag = document.createElement("section"); 
-        tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder">
+        tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder"/>
         <input type="date"/>
-        <input type=button value=+ onclick="addReminder()">`; 
+        <input type=button value=+ onclick="addReminder()" id="Add"/>`; 
 
-        console.log(tag.innerHTML);
     
         var reminderSection = document.getElementById("reminders2"); 
         reminderSection.appendChild(tag);
-        getDate();  
+        AddRemoveSign(); 
+        
      }
 
-    const  getDate = () => {
-        var remin = document.getElementById("reminders2"); 
-        var section = remin.getElementsByTagName("section"); 
-        console.log(section[1].innerHTML); 
-    }
+     const AddRemoveSign = () => {
+        var reminderSet = document.getElementById('reminders2'); 
+        var section = reminderSet.getElementsByTagName('section'); 
+        for (var i = removeCountSign; i < section.length; ++i){
+            var subSection = section[i].lastElementChild.tagName; 
+            console.log(subSection.innerHTML); 
+            
+        }
+     }

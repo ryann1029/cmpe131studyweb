@@ -288,7 +288,7 @@ table input {
     cursor:pointer;
   }
 
-  .reminders section input[type=button] {
+  .reminders #Add{
     margin:0 0 15px 0;
     margin-bottom: 0%;
     border:1px solid white;
@@ -303,6 +303,23 @@ table input {
     width:35px;
     float:right;
     cursor:pointer;
+  }
+
+  .reminders #Remove{
+      margin: 0 0 15px 0; 
+      margin-bottom: 0%; 
+      border: 1px solid white; 
+      background: #333; 
+      color: red;
+      border-radius:1px;
+      padding:5px;
+      font-size: 19pt;
+      line-height:1;
+      font-weight:bold;
+      outline:none;
+      width:35px;
+      float:right;
+      cursor:pointer;
   }
 
 /**************** 2) DESKTOP VIEW ****************/
