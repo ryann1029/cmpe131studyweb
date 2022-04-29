@@ -318,7 +318,7 @@ def flashcards():
         current_user = current_email.user
         current_id = current_email.id
         # print(Users.query.filter(Users.id == current_id).all())
-        return render_template("flashcards.html", user=current_user, values=Flashcards.query.filter(Users.id == current_id).all())
+        return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
     
     return redirect(url_for("login"))
 
