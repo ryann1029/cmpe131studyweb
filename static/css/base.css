@@ -10,11 +10,6 @@ TABLE OF CONTENTS
 ********************************
 */
 
-
-
-
-
-
 /**************** 1) STARTUP - ROOT/VARIABLES ****************/
 @charset "UTF-8";
 
@@ -133,7 +128,6 @@ table input {
     line-height: 1.5;
     border-radius: 0.25rem;
 } */
-
 .calendar-class{
     margin: 0;
     padding: 0;
@@ -308,12 +302,6 @@ table input {
     float:right;
     cursor:pointer;
   }
-  
-
-
-
-
-
 
 /**************** 2) DESKTOP VIEW ****************/
 /* only enables this CSS code block whenever the width of the screen is greater than 1024 pixels */
@@ -372,21 +360,16 @@ table input {
 
 }
 
+/* Adjusts the calendar settings when zoomed out for 6k and 8k Monitors
+It will look normal on 1080p, 1440p, and 4k monitors */
 @media screen and (min-width: 2160px) {
     .calendar-class{
         margin: 0;
         padding: 0;
-        /* margin-left: -13%; */
         box-sizing: border-box;
         font-family: "Quicksand", sans-serif;
-        /* position: relative;
-        display: flex;
-        resize: none; */
     }
 }
-
-
-
 
 /**************** 3) TABLET/MOBILE DEFAULT SETTINGS ****************/
 @media screen and (max-width: 1024px) {
@@ -426,11 +409,6 @@ table input {
     }
 }
 
-
-
-
-
-
 /**************** 3a) SPECIFIC TABLET VIEW CONFIGURATIONS ****************/
 /* only show specific tablet configurations when screen width is between 600 pixels to 1024 pixels */
 @media screen and (min-width: 600px) and (max-width: 1024px) {
@@ -463,11 +441,6 @@ table input {
     }
 }
 
-
-
-
-
-
 /**************** 3b) SPECIFIC MOBILE VIEW CONFIGURATIONS ****************/
 /* only show specific tablet configurations when screen width is under 600 pixels */
 @media screen and (max-width: 600px) {
@@ -479,11 +452,6 @@ table input {
         display: none;
     }
 }
-
-
-
-
-
 
 /**************** 4) WEBKIT ANIMATION ****************/
 /* Creates Rainbow animation text - from red to orange... to purple, and repeat. */
