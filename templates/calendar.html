@@ -50,18 +50,21 @@
                     </div>
                 </td>
                 <td class="force-border-remove">
-                    <div class ="reminders">
+                    <div class ="reminders" id="reminders2">
                         <h2>Reminders</h2>
                         <section>
                             <input type="text" autofocus>
                             <input type="date"/ style="margin-left: 10%;">
                             <input type="button" value=+ onClick=reminders.create(input.value)>
+                            <input type="text" autofocus placeholder="Enter your reminder">
+                            <input type="date"/>
+                            <input type=button value=+ onclick="addReminder()">
                         </section>
                     </div>
                 </td>
             </tr>
         </body>
         <script src="static\js\calendar.js"></script>  
-        <script scr="statik\js\reminders.js"></script>
+        <script scr="static\js\reminders.js"></script>
 </html>
 {% endblock %}

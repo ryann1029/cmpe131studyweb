@@ -290,7 +290,7 @@ table input {
 
   .reminders section input[type=button] {
     margin:0 0 15px 0;
-    margin-bottom: 150%;
+    margin-bottom: 0%;
     border:1px solid white;
     background:#333;
     color: green;
