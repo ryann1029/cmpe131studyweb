@@ -8,26 +8,45 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 # app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
 app.secret_key = "Test" # Make key complicated at one point
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Users.sqlite3'
 app.config["SQLALCHEMY_TRACK_NOTIFICATIONS"] = False
 app.permanent_session_lifetime = timedelta(days=1) # permanent session will be kept for this long
 
 db = SQLAlchemy(app)
 
-class users(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True) # unique identity
+# class Person(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(50))
+#     addresses = db.relationship('Address', backref='person', lazy='dynamic')
+
+# class Address(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     email = db.Column(db.String(50))
+#     person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
+
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True) # unique identity
     user = db.Column(db.String(100)) # name containing max 100 characters
     email = db.Column(db.String(100)) # email containing max 100 characters
     password = db.Column(db.String(100)) # email containing max 100 characters
     notes = db.Column(db.String(100000))
-
-
+    
     def __init__(self, user, email, password, notes):
         self.user = user
         self.email = email
         self.password = password
         self.notes = notes
 
+class Flashcards(db.Model):
+    id = db.Column(db.Integer, primary_key=True) # unique identity
+    key = db.Column(db.String(100000))
+    value = db.Column(db.String(100000))
+    user_id = db.Column(db.Integer)
+
+    def __init__(self, key, value, user_id):
+        self.key = key
+        self.value = value
+        self.user_id = user_id
 
 
 
@@ -40,7 +59,7 @@ def home():
     current_user = None
     if "email" in session:
         email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
     return render_template("home.html", user=current_user) #using render_template so that it renders the content ot the HTML and does no not affect URL
 
@@ -50,7 +69,7 @@ def calculator():
     current_user = None
     if "email" in session:
         email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
     return render_template("grade-calculator.html", user=current_user)
 
@@ -60,7 +79,7 @@ def calender():
     current_user = None
     if "email" in session:
         email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
     return render_template("calendar.html", user=current_user)
 
@@ -70,9 +89,9 @@ def about_us():
     current_user = None
     if "email" in session:
         email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
-    return render_template("about_us.html", current_user=user)
+    return render_template("about_us.html", user=current_user)
 
 
 
@@ -107,17 +126,17 @@ def signup():
 
         if password != repassword:
             flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Password does not match. Please retry sign up again.</span>"))
-            return render_template("signup.html", special_user=user1, special_email=email1)
+            return render_template("signup.html", special_user=user, special_email=email)
 
         else:
-            found_email = users.query.filter_by(email=email).first()
+            found_email = Users.query.filter_by(email=email).first()
 
             if found_email:
                 # session["email"] = email # storing value of user in the dictionary.
                 flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Email already exists. Log in instead.</span>"))
             else:
                 # print("Email does not exists.")
-                db.session.add(users(user, email, password, None))
+                db.session.add(Users(user, email, password, None))
                 db.session.commit()
 
                 flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Signed up successful.</span>"))
@@ -151,9 +170,9 @@ def login():
             return render_template("login.html", email=email1, password=password1)
         
         else:
-            email_exist = users.query.filter_by(email=email).first()
+            email_exist = Users.query.filter_by(email=email).first()
             if email_exist:
-                email_password_match = users.query.filter_by(email=email, password=password).first()
+                email_password_match = Users.query.filter_by(email=email, password=password).first()
                 if email_password_match:
                     session["email"] = email # storing value of email in the dictionary.
                     
@@ -178,11 +197,11 @@ def changePassword():
     current_user = None
     if "email" in session:
         email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
 
     if request.method == "POST":
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_password = current_email.password
 
         oldpass = request.form["oldpass"]
@@ -203,7 +222,7 @@ def changePassword():
                 flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">New password and retyped new password do not match.</span>"))
                 return render_template("change-password.html", user=current_user)
             else:
-                current_email = users.query.filter(users.email == email).one()
+                current_email = Users.query.filter(Users.email == email).one()
                 current_email.password = newpassword
                 db.session.commit()
                 flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Password successfully changed.</span>"))
@@ -218,7 +237,7 @@ def logout():
     if "email" in session:
         email = session["email"]
 
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
 
         flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Successfully logged out. See you later, ") + f"{current_user}!" + Markup("</span>"))
@@ -235,13 +254,13 @@ def view():
     current_user = None
     if "email" in session:
         email = session["email"] # admin@sus.com
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
 
     if "email" in session:
         email = session["email"]
         if email == "admin@sus.com":
-            return render_template("view.html", user=current_user, values=users.query.all())
+            return render_template("view.html", user=current_user, values=Users.query.all())
         else:
             return redirect(url_for("login"))
     else:
@@ -256,9 +275,9 @@ def user():
     if "email" in session: # checking if "email" in dictionary has a value
         email = session["email"]
 
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
-        current_id = current_email._id
+        current_id = current_email.id
         current_notes = current_email.notes
 
         if current_notes == "":
@@ -274,7 +293,7 @@ def editingNotes():
     current_user = None
     if "email" in session:
         email = session["email"]
-        current_email = users.query.filter(users.email == email).one()
+        current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
         current_notes = current_email.notes
 
@@ -290,6 +309,38 @@ def editingNotes():
     else:
         return redirect(url_for("login"))
         
+@app.route("/flashcards", methods=["POST", "GET"])
+def flashcards():
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = Users.query.filter(Users.email == email).one()
+        current_user = current_email.user
+        current_id = current_email.id
+        # print(Users.query.filter(Users.id == current_id).all())
+        return render_template("flashcards.html", user=current_user, values=Flashcards.query.filter(Users.id == current_id).all())
+    
+    return redirect(url_for("login"))
+
+@app.route("/add-flashcard", methods=["POST", "GET"])
+def addFlashcard():
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = Users.query.filter(Users.email == email).one()
+        current_user = current_email.user
+        current_id = current_email.id
+
+        if request.method == "POST":
+            key = request.form["addkey"]
+            value = request.form["addvalue"]
+            db.session.add(Flashcards(key, value, current_id))
+            db.session.commit()
+            return redirect(url_for("flashcards"))
+        else:
+            return render_template("add_flashcard.html", user=current_user)
+    else:
+        return redirect(url_for("login"))
 
 # Any pages that don't exist goes to "error404.html"
 # @app.route("/<name>")
@@ -298,7 +349,16 @@ def editingNotes():
 
 @app.route("/ryan")
 def ryan():
-    return render_template("ryan_test.html")
+    current_user = None
+    if "email" in session:
+        email = session["email"]
+        current_email = Users.query.filter(Users.email == email).one()
+        current_id = current_email._id
+        current_user = current_email.user
+        # flashcard_all = Flashcards.query.filter(Flashcards.user_id == current_id).all()
+        # print(Flashcards.user_id)
+
+    return render_template("ryan_test.html", user=current_user)
 
 
 
@@ -317,10 +377,13 @@ def page():
 # Run Program
 if __name__ == "__main__":
     db.create_all() # creates database - must be before app.run()
-    found_email = users.query.filter_by(email="admin@sus.com").first()
+    found_email = Users.query.filter_by(email="admin@sus.com").first()
     if found_email:
         pass
     else:
-        db.session.add(users("Ryan", "admin@sus.com", "pass123", None))
+        identification = Users("Ryan", "admin@sus.com", "pass123", None)
+        db.session.add(identification)
         db.session.commit()
+    
+
     app.run(debug = True) # runs program. Every time you save any file, the new version will run.
