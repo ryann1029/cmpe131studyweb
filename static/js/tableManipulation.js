@@ -12,13 +12,8 @@ function rowCount(dataTable) {
       rowCount++;
    }
 
-   document.querySelector("#rowCount").innerHTML =
-   `${rowCount-1}`;
-
    return rowCount;
 }
-
-
 
 function addRow(dataTable){
    var table = document.getElementById(dataTable); 
