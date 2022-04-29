@@ -17,8 +17,8 @@ const renderCalendar = () => {
 
     const nextDays = 42 - (lastDay + firstDayIndex)
 
-    document.querySelector(".date h").innerHTML = month[date.getMonth()];
-    document.querySelector(".date p").innerHTML = new Date().toDateString();
+    document.querySelector(".date h").innerHTML = month[date.getMonth()] + " " + date.getFullYear(); 
+    document.querySelector(".date p").innerHTML = "Current Date: " + new Date().toDateString();
    
     let days = ""; 
 
@@ -44,6 +44,10 @@ const renderCalendar = () => {
     }
     }
     
+    document.querySelector('.days').addEventListener('click', () => {
+        addReminder(); 
+    })
+
     document.querySelector('.prev').addEventListener('click', () => {
         date.setMonth(date.getMonth() - 1); 
         renderCalendar(); 
@@ -64,16 +68,12 @@ const renderCalendar = () => {
         console.log(tag.innerHTML);
     
         var reminderSection = document.getElementById("reminders2"); 
-        reminderSection.appendChild(tag); 
-        getDate(); 
-    }
+        reminderSection.appendChild(tag);
+        getDate();  
+     }
 
     const  getDate = () => {
         var remin = document.getElementById("reminders2"); 
         var section = remin.getElementsByTagName("section"); 
-        var sectionCount = 0; 
-        for (var i = 0; i < section.length; ++i){
-            let date = section.getAttribute("date"); 
-            console.log(date); 
-        }
+        console.log(section[1].innerHTML); 
     }
