@@ -10,11 +10,18 @@
 
 <body>
     {% for item in values %}
-        <!-- <div>User ID: {{item.user_id}} == {{id}}</div> -->
+    {% if item %}
         {% if item.user_id == id %}
-            <div>Key: {{item.key}}<br/>Value:{{item.value}}<br/>User ID: {{item.user_id}}</div>
-            <hr/>
+            <details>
+                <summary>
+                {{item.key}} <span class="icon">🔺</span>
+                </summary>
+                <hr style="border-color: white"/>
+                <p>{{item.value}}</p>
+            </details>
+            <div>
         {% endif %}
     {% endfor %}
+    <a class="btn btn-outline-success my-2 my-sm-0" href="add-flashcard">Add Flashcard</button></a>
 </body>
 {% endblock %}
