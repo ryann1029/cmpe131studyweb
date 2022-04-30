@@ -308,13 +308,13 @@ details {
     font-weight:normal;
     outline:none;
     float:left;
-    width:calc(100% - 50px);
+    width:calc(100% - 100px);
     cursor:pointer;
   }
 
   .reminders #Add{
     margin:0 0 15px 0;
-    margin-bottom: 0%;
+    margin-bottom: 5px;
     border:1px solid white;
     background:#333;
     color: green;
@@ -332,6 +332,7 @@ details {
   .reminders #Remove{
       margin: 0 0 15px 0; 
       margin-bottom: 0%; 
+      margin-left:5px;
       border: 1px solid white; 
       background: #333; 
       color: red;
