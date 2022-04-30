@@ -59,7 +59,7 @@ table {
 th, td {
     border: 1px solid gray;
     padding: 0.25em;
-    min-width: 10em;
+    /* min-width: 10em; */
 }
 
 /* Adjust font size of input boxes in tables */
@@ -70,6 +70,36 @@ table input {
 .force-border-remove td{ 
     border-collapse: collapse;
     border-style: hidden;
+}
+
+.outer-border-remove {
+    border-collapse: collapse;
+    border: none;
+  }
+  
+.outer-border-remove td {
+    border: 1px solid white;
+}
+
+.inner-border-remove-top-bottom td {
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.outer-border-remove tr:first-child td {
+    border-top: none;
+}
+
+.outer-border-remove tr:last-child td {
+    border-bottom: none;
+}
+
+.outer-border-remove tr td:first-child {
+    border-left: none;
+}
+
+.outer-border-remove tr td:last-child {
+    border-right: none;
 }
 
 .of-wrap {

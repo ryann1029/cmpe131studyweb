@@ -9,19 +9,54 @@
 </head>
 
 <body>
-    {% for item in values %}
-    {% if item %}
-        {% if item.user_id == id %}
-            <details>
-                <summary>
-                {{item.key}} <span class="icon">🔺</span>
-                </summary>
-                <hr style="border-color: white"/>
-                <p>{{item.value}}</p>
-            </details>
-            <div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="flash-notif" id="timerNoDisplay">{{msg}}</div>
+            {% endfor %}
         {% endif %}
-    {% endfor %}
+    {% endwith %}
+    <center>
+        <table class="outer-border-remove" style="width: 100%" style="text-align: center">
+            <tbody>
+                <tr>
+                    <td style="text-align: center; border-right: 1px solid white;">
+                        <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center; font-size: 16pt;">ID</div>
+                    </td>
+                    <td style="width: 97%; text-align: center">
+                        <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center; font-size: 16pt;">Flashcards</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="border-bottom: 3px solid white; margin-top: 1em; margin-bottom: 1em;"/>
+
+        <table class="outer-border-remove inner-border-remove-top-bottom" style="width: 100%; margin-bottom: 1em;">
+            {% for item in values %}
+                {% if item and item.user_id == id %}
+                    <tr>
+                        <td style="border-right: 1px solid white;">
+                            <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center;">{{item.id}}</div>
+                        </td>
+                        <td style="width: 97%;">
+                            <details id=flash-{{item.id}}>
+                                <summary>
+                                {{item.key}} <span class="icon">🔺</span>
+                                </summary>
+                                <hr style="border-color: white"/>
+                                <p>{{item.value}}</p>
+                            </details>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </center>
     <a class="btn btn-outline-success my-2 my-sm-0" href="add-flashcard">Add Flashcard</button></a>
+
+    <form action="#" method="post" style="position: relative; float: right;">
+        <input type="number" name="delete-flashcard" placeholder="Flashcard ID"/>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Delete Flashcard</button>
+    </form>
 </body>
 {% endblock %}

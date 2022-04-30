@@ -318,8 +318,25 @@ def flashcards():
         current_user = current_email.user
         current_id = current_email.id
         # print(Users.query.filter(Users.id == current_id).all())
-        return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
+
+        if request.method == "POST":
+            flash_id_request = request.form["delete-flashcard"]
+            find_id = Flashcards.query.filter(Flashcards.id == flash_id_request).first()
+
+            if find_id:
+                find_id = Flashcards.query.filter(Flashcards.id == flash_id_request).one()
+                db.session.delete(find_id)
+                db.session.commit()
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Flashcard #") + f"{find_id.id}" + Markup(" deleted successfully.</span>"))
+                return redirect(url_for("flashcards"))
+                # return render_template("delete-flashcard.html", user=current_user, id=flash_id)
+            else:
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Flashcard #") + f"{flash_id_request}" + Markup(" does not exist.</span>"))
+                return redirect(url_for("flashcards"))
+        else:
+            return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
     
+    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">You need to be logged in to use the Flashcard feature.</span>"))
     return redirect(url_for("login"))
 
 @app.route("/add-flashcard", methods=["POST", "GET"])
@@ -334,13 +351,27 @@ def addFlashcard():
         if request.method == "POST":
             key = request.form["addkey"]
             value = request.form["addvalue"]
-            db.session.add(Flashcards(key, value, current_id))
-            db.session.commit()
-            return redirect(url_for("flashcards"))
+
+            if key == "" and value == "":
+                key1 = None
+                value1 = None
+
+                if key == "":
+                    key1 = key
+                if value == "":
+                    value1 = value
+
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Please fill all entries.</span>"))
+                return render_template("add-flashcard.html", user=current_user, key=key1, value=value1)
+            else:
+                db.session.add(Flashcards(key, value, current_id))
+                db.session.commit()
+                return redirect(url_for("flashcards"))
         else:
-            return render_template("add_flashcard.html", user=current_user)
+            return render_template("add-flashcard.html")
     else:
         return redirect(url_for("login"))
+
 
 # Any pages that don't exist goes to "error404.html"
 # @app.route("/<name>")
