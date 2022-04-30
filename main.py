@@ -412,7 +412,7 @@ if __name__ == "__main__":
     if found_email:
         pass
     else:
-        identification = Users("Ryan", "admin@sus.com", "pass123", None)
+        identification = Users("Sysop", "sysop@sus.com", "sysopalv", None)
         db.session.add(identification)
         db.session.commit()
     
