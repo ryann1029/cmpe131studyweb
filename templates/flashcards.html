@@ -38,7 +38,7 @@
                         <td style="border-right: 1px solid white;">
                             <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center;">{{item.id}}</div>
                         </td>
-                        <td style="width: 97%;">
+                        <td style="width: 97%;" id="slot">
                             <details id=flash-{{item.id}}>
                                 <summary>
                                 {{item.key}} <span class="icon">🔺</span>
@@ -53,10 +53,15 @@
         </table>
     </center>
     <a class="btn btn-outline-success my-2 my-sm-0" href="add-flashcard">Add Flashcard</button></a>
+    <input type="button" value="Expand All" class="btn btn-outline-success my-2 my-sm-0" onclick="ExpandAll()"/></td>
+    <input type="button" value="Collapse All" class="btn btn-outline-success my-2 my-sm-0" onclick="CollapseAll()"/></td>
+    
 
     <form action="#" method="post" style="position: relative; float: right;">
         <input type="number" name="delete-flashcard" placeholder="Flashcard ID"/>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Delete Flashcard</button>
     </form>
+
+    <script src="static\js\flashcard.js"></script>
 </body>
 {% endblock %}
