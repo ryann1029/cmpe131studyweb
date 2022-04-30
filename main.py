@@ -325,10 +325,16 @@ def flashcards():
 
             if find_id:
                 find_id = Flashcards.query.filter(Flashcards.id == flash_id_request).one()
-                db.session.delete(find_id)
-                db.session.commit()
-                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Flashcard #") + f"{find_id.id}" + Markup(" deleted successfully.</span>"))
-                return redirect(url_for("flashcards"))
+                flashcard_user_id = find_id.user_id
+
+                if flashcard_user_id == current_id:
+                    db.session.delete(find_id)
+                    db.session.commit()
+                    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Flashcard #") + f"{find_id.id}" + Markup(" deleted successfully.</span>"))
+                    return redirect(url_for("flashcards"))
+                else:
+                    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Flashcard #") + f"{flash_id_request}" + Markup(" does not exist.</span>"))
+                    return redirect(url_for("flashcards"))
                 # return render_template("delete-flashcard.html", user=current_user, id=flash_id)
             else:
                 flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Flashcard #") + f"{flash_id_request}" + Markup(" does not exist.</span>"))
