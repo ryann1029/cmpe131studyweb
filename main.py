@@ -253,13 +253,13 @@ def logout():
 def view():
     current_user = None
     if "email" in session:
-        email = session["email"] # admin@sus.com
+        email = session["email"] # sysop@sus.com
         current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
 
     if "email" in session:
         email = session["email"]
-        if email == "admin@sus.com":
+        if email == "sysop@sus.com":
             return render_template("view.html", user=current_user, values=Users.query.all())
         else:
             return redirect(url_for("login"))
@@ -408,7 +408,7 @@ def page():
 # Run Program
 if __name__ == "__main__":
     db.create_all() # creates database - must be before app.run()
-    found_email = Users.query.filter_by(email="admin@sus.com").first()
+    found_email = Users.query.filter_by(email="sysop@sus.com").first()
     if found_email:
         pass
     else:
