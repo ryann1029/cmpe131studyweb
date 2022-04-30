@@ -137,32 +137,46 @@ details {
     margin-top: 1em;
     margin-bottom: 1em;
     background-color: #333;
-  }
+}
 
-  details>summary span.icon {
+details>summary span.icon {
     /* width: 24px;
     height: 24px; */
     transition: all 0.3s;
     position: relative;
     float: right;
     vertical-align: middle;
-  }
-  
-  details[open] summary span.icon {
+}
+
+details[open] summary span.icon {
     transform: rotate(180deg);
-  }
-  
-  summary {
+}
+
+summary {
     display: flex;
     cursor: pointer;
-  }
-  
-  details > summary {
-    list-style: none;
-  }
+}
 
-  details > summary::-webkit-details-marker {
+details > summary {
+    list-style: none;
+}
+
+details > summary::-webkit-details-marker {
     display: none;
+}
+
+.delete-flashcard-input {
+    margin: 0 15px 15px 0;
+    background:#555;
+    color:white;
+    border:1px solid white;
+    border-radius: 0.25em;
+    padding: 4px;
+    font-size:14pt;
+    font-weight:normal;
+    outline:none;
+    float:left;
+    cursor:pointer;
   }
 
 @keyframes cssAnimation {
