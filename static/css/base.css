@@ -421,7 +421,7 @@ details > summary::-webkit-details-marker {
   .prev-slide:hover, .next-slide:hover{
     background-color: rgba(0,0,0,0.8);
   }
-
+  
   .caption{
     color: #f2f2f2;
     font-size: 15px;
