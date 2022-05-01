@@ -52,17 +52,29 @@
                 <td class="force-border-remove">
                     <div class ="reminders" id="reminders2">
                         <h2>Reminders</h2>
-                        <section>
+                        <br>
+                        
+                        <section id = "s">
                             <!--<input type="text" autofocus placeholder="Enter your reminder"/>
                             <input type="text" autofocus>
                             <input type="date"/ style="margin-left: 10%;"> -->
                             <!--<input type="button" value=+ onClick=reminders.create(input.value)> -->
-                            <input type="text" autofocus placeholder="Enter your reminder">
-                            <input type="date"/>
-                            <input type=button value=+ onclick="addReminder()" id="Add"/>
+                            <input type="text" autofocus placeholder="Enter your reminder" id = "Text"/> 
+                            <input type=button class = "Add" value=+ onclick="addReminder()" id="Add"/>
+                            <input type=button class = "Remove" value=- onclick="AddRemoveSign()" id="Remove"/>
+                            <input type="date" id = "Date"/>
+                            <br>
+                            <br>
                         </section>
+                    
                     </div>
+                    
                 </td>
+                
+
+                <div>
+                    
+                </div>
             </tr>
         </body>
         <script src="static\js\calendar.js"></script>  

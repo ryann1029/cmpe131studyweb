@@ -253,13 +253,13 @@ def logout():
 def view():
     current_user = None
     if "email" in session:
-        email = session["email"] # admin@sus.com
+        email = session["email"] # sysop@sus.com
         current_email = Users.query.filter(Users.email == email).one()
         current_user = current_email.user
 
     if "email" in session:
         email = session["email"]
-        if email == "admin@sus.com":
+        if email == "sysop@sus.com":
             return render_template("view.html", user=current_user, values=Users.query.all())
         else:
             return redirect(url_for("login"))
@@ -318,8 +318,31 @@ def flashcards():
         current_user = current_email.user
         current_id = current_email.id
         # print(Users.query.filter(Users.id == current_id).all())
-        return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
+
+        if request.method == "POST":
+            flash_id_request = request.form["delete-flashcard"]
+            find_id = Flashcards.query.filter(Flashcards.id == flash_id_request).first()
+
+            if find_id:
+                find_id = Flashcards.query.filter(Flashcards.id == flash_id_request).one()
+                flashcard_user_id = find_id.user_id
+
+                if flashcard_user_id == current_id:
+                    db.session.delete(find_id)
+                    db.session.commit()
+                    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Flashcard #") + f"{find_id.id}" + Markup(" deleted successfully.</span>"))
+                    return redirect(url_for("flashcards"))
+                else:
+                    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Flashcard #") + f"{flash_id_request}" + Markup(" does not exist.</span>"))
+                    return redirect(url_for("flashcards"))
+                # return render_template("delete-flashcard.html", user=current_user, id=flash_id)
+            else:
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Flashcard #") + f"{flash_id_request}" + Markup(" does not exist.</span>"))
+                return redirect(url_for("flashcards"))
+        else:
+            return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
     
+    flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">You need to be logged in to use the Flashcard feature.</span>"))
     return redirect(url_for("login"))
 
 @app.route("/add-flashcard", methods=["POST", "GET"])
@@ -334,13 +357,27 @@ def addFlashcard():
         if request.method == "POST":
             key = request.form["addkey"]
             value = request.form["addvalue"]
-            db.session.add(Flashcards(key, value, current_id))
-            db.session.commit()
-            return redirect(url_for("flashcards"))
+
+            if key == "" and value == "":
+                key1 = None
+                value1 = None
+
+                if key == "":
+                    key1 = key
+                if value == "":
+                    value1 = value
+
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Please fill all entries.</span>"))
+                return render_template("add-flashcard.html", user=current_user, key=key1, value=value1)
+            else:
+                db.session.add(Flashcards(key, value, current_id))
+                db.session.commit()
+                return redirect(url_for("flashcards"))
         else:
-            return render_template("add_flashcard.html", user=current_user)
+            return render_template("add-flashcard.html")
     else:
         return redirect(url_for("login"))
+
 
 # Any pages that don't exist goes to "error404.html"
 # @app.route("/<name>")
@@ -377,11 +414,11 @@ def page():
 # Run Program
 if __name__ == "__main__":
     db.create_all() # creates database - must be before app.run()
-    found_email = Users.query.filter_by(email="admin@sus.com").first()
+    found_email = Users.query.filter_by(email="sysop@sus.com").first()
     if found_email:
         pass
     else:
-        identification = Users("Ryan", "admin@sus.com", "pass123", None)
+        identification = Users("Sysop", "sysop@sus.com", "sysopalv", None)
         db.session.add(identification)
         db.session.commit()
     

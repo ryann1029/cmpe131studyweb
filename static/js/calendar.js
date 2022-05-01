@@ -61,25 +61,54 @@ const renderCalendar = () => {
     })
     renderCalendar();
 
+    const array = []
+    var i = 0;
+    var t;
+    var reminderSection = document.getElementById("reminders2"); 
     const addReminder = () => {
-        var tag = document.createElement("section"); 
-        tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder"/>
-        <input type="date"/>
-        <input type=button value=+ onclick="addReminder()" id="Add"/>`; 
 
-    
-        var reminderSection = document.getElementById("reminders2"); 
+        const plus = document.getElementById("Add");
+        plus.remove();
+        const minus = document.getElementById("Remove");
+        minus.remove();
+        tag = document.createElement("section"); 
+        
+        tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder" id = "Text"/> 
+        <input type=button class = "Add" value=+ onclick="addReminder()" id="Add"/>
+        <input type=button class = "Remove" value=- onclick="AddRemoveSign()" id="Remove"/>
+        <input type="date" id = "Date"/>
+        <br><br>`;
+        
+        array.push(tag);
+        
         reminderSection.appendChild(tag);
-        AddRemoveSign(); 
         
      }
 
      const AddRemoveSign = () => {
+        var text = document.getElementById("Text");
+        text.remove();
+        var date = document.getElementById("Date");
+        date.remove();
+        
+
+         /*
+        var date = document.getElementById("Date");
+        date.remove();
+        var text= document.getElementById("Text");
+        text.remove();*/
+        /* 
         var reminderSet = document.getElementById('reminders2'); 
         var section = reminderSet.getElementsByTagName('section'); 
         for (var i = removeCountSign; i < section.length; ++i){
             var subSection = section[i].lastElementChild.tagName; 
-            console.log(subSection.innerHTML); 
+            console.log(subSection.innerHTML);*/
             
         }
-     }
+    const MinusSign = () =>{
+        const minus = document.getElementById("Remove");
+        minus.remove();
+    }
+    
+
+
