@@ -372,6 +372,7 @@ def addFlashcard():
             else:
                 db.session.add(Flashcards(key, value, current_id))
                 db.session.commit()
+                flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Checkmark Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: lime;\">Flashcard added successfully.</span>"))
                 return redirect(url_for("flashcards"))
         else:
             return render_template("add-flashcard.html")
