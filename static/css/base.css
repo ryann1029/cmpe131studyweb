@@ -397,6 +397,7 @@ details > summary::-webkit-details-marker {
       position: relative;
       margin: auto;
       margin-bottom: 65%;
+      box-shadow: 1rem black ;
   }
   .prev-slide, .next-slide{
       cursor: pointer;
@@ -408,9 +409,10 @@ details > summary::-webkit-details-marker {
       color: white;
       font-weight: bold;
       font-size: 18px;
-      transition: 0.6s ease;
+      transition: 1s ease;
       border-radius: 0 3px 3px 0;
       user-select: none;
+      background-color: #555;
   }
 
   .next-slide{
@@ -423,7 +425,7 @@ details > summary::-webkit-details-marker {
   }
   
   .caption{
-    color: black;
+    color: yellow;
     font-size: 20px;
     font-weight: bold;
     padding: 25px 12px;
@@ -431,6 +433,7 @@ details > summary::-webkit-details-marker {
     bottom: 8px;
     width: 100%;
     text-align: center;
+    text-shadow: 0 0.2rem .1rem rgba(0,0,0,0.5);
   }
 
   .dot {
@@ -441,7 +444,7 @@ details > summary::-webkit-details-marker {
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    transition: background-color 0.6s ease;
+    transition: background-color 1s ease;
   }
   
   .active, .dot:hover {
@@ -458,6 +461,13 @@ details > summary::-webkit-details-marker {
     to {opacity: 1}
   }
   
+  .biography{
+      font-size: large;
+      text-align: left;
+  }
+  .bio-image img{
+    float: left;
+  }
 
 /**************** 2) DESKTOP VIEW ****************/
 /* only enables this CSS code block whenever the width of the screen is greater than 1024 pixels */
