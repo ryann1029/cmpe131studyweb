@@ -63,21 +63,22 @@ const renderCalendar = () => {
 
     const array = []
     var i = 0;
-    var t;
     var reminderSection = document.getElementById("reminders2"); 
     const addReminder = () => {
 
-        const plus = document.getElementById("Add");
+        /*const plus = document.getElementById("Add");
         plus.remove();
         const minus = document.getElementById("Remove");
-        minus.remove();
+        minus.remove();*/
         tag = document.createElement("section"); 
         
         tag.innerHTML = `<input type="text" autofocus placeholder="Enter your reminder" id = "Text"/> 
         <input type=button class = "Add" value=+ onclick="addReminder()" id="Add"/>
         <input type=button class = "Remove" value=- onclick="AddRemoveSign()" id="Remove"/>
         <input type="date" id = "Date"/>
-        <br><br>`;
+        <br/><br/>`;
+
+        //t();
         
         array.push(tag);
         
@@ -85,11 +86,32 @@ const renderCalendar = () => {
         
      }
 
+     const t = () => {
+        var dat = 'Date1';
+        document.getElementById('Date').id = dat;
+        document.getElementById('Text').id = 'Text1';
+        document.getElementById('Add').id = 'Add1';
+        document.getElementById('Remove').id = 'Remove1';
+    }
+
      const AddRemoveSign = () => {
-        var text = document.getElementById("Text");
+        /*var text = document.getElementById("Text");
         text.remove();
         var date = document.getElementById("Date");
+        date.remove();*/
+        var t = array.pop();
+        t.remove();
+        /*var date = document.getElementById('Date1');
         date.remove();
+
+        var Text = document.getElementById('Text1');
+        Text.remove();*/
+
+        var add = document.getElementById('Add1');
+        add.remove();
+
+        var t = document.getElementById('Remove1');
+        t.remove();
         
 
          /*
