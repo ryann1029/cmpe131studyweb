@@ -1,4 +1,38 @@
-const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect any letters.
+const isAlpha = str => /^([a-zA-Z0-9]|\s)*$/.test(str); // Using RegEx to detect any letters.\
+
+const checkExceptionAssignment  = (assignmentName) => {
+  if (assignmentName == "") {
+    //assignment.value=="0";
+    console.log("assignment: " + assignment.value)
+    document.querySelector("#showdata").innerHTML = `
+   <div style="color: red;">Please enter all the fields.</div>
+   `;
+   windows.stop(); 
+  }
+  if (!/^[\w\d\s]+$/.test(assignmentName)) { //special characters aren't being detected for the second row
+    console.log("assignment: " + assignment.value)
+      document.querySelector("#showdata").innerHTML = `
+         <div style="color: red;">No special characters are allowed for course name. Correct your inputs.</div>
+         `;
+         windows.stop();
+   }
+}
+
+const CheckWeightException = (weightValue) => {
+  if (weightValue == "") {
+  document.querySelector("#showdata").innerHTML = `
+ <div style="color: red;">No weight inputted.</div>
+ `;
+    windows.stop();
+  }
+  if (!/^[0-9]+$/.test(weightValue)) {
+
+  document.querySelector("#showdata").innerHTML = `
+    <div style="color: red;">Please include valid numbers for the weight.</div>
+    `;
+    windows.stop(); 
+}
+}
 
 const calculate = () => {
 
@@ -25,7 +59,8 @@ const calculate = () => {
   // check the weight first and get the column count
   for (var i = 0; i < 5; ++i){
     var Table = document.getElementById(data_table[i]); 
-    var row_weight = Table.rows[0].cells[0];  
+    var row_weight = Table.rows[0].cells[0]; 
+    CheckWeightException(parseFloat(row_weight.querySelector("#weight").value)); 
     boundary_temp += parseFloat(row_weight.querySelector("#weight").value); 
     temp_weight[i] = parseFloat(row_weight.querySelector("#weight").value); 
     weighted_grade_points[i] += parseFloat(row_weight.querySelector("#weight").value)
@@ -42,6 +77,8 @@ const calculate = () => {
         continue; 
       }
       var row = Table.rows[j].cells[0]; 
+      var nameOfAssignment = row.querySelector("#assignment").value; 
+      checkExceptionAssignment(nameOfAssignment); 
       total_score_sum[i] += parseFloat(row.querySelector("#score").value); 
       total_points_possible[i] += parseFloat(row.querySelector("#pointspossible").value); 
     }
