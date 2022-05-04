@@ -380,6 +380,12 @@ def addFlashcard():
         return redirect(url_for("login"))
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('error404.html'), 404
+
+
 # Any pages that don't exist goes to "error404.html"
 # @app.route("/<name>")
 # def user(name):
