@@ -23,7 +23,7 @@ const calculate = () => {
 
   var boundary_temp = 0; 
   // check the weight first and get the column count
-  for (var i = 0; i < 5; ++i){
+  for (var i = 0; i < 5; i++){
     var Table = document.getElementById(data_table[i]); 
     var row_weight = Table.rows[0].cells[0];  
     boundary_temp += parseFloat(row_weight.querySelector("#weight").value); 
@@ -100,11 +100,11 @@ const calculate = () => {
          <div style="color: red;">No special characters are allowed for course name. Correct your inputs.</div>
          `;
 
-    } else if (weight.value == "") {
+    } else if (boundary_temp == "") {
       document.querySelector("#showdata").innerHTML = `
      <div style="color: red;">No weight inputted.</div>
      `;
-    } else if (!/^[0-9]+$/.test(weight.value)) {
+    } else if (!/^[0-9]+$/.test(boundary_temp)) {
 
       document.querySelector("#showdata").innerHTML = `
         <div style="color: red;">Please include valid numbers for the weight.</div>
@@ -120,6 +120,7 @@ const calculate = () => {
         <div style="color: red;">Please include valid numbers for the weight in column 3.</div>
         `;
     } 
+    
     else if (!/^[0-9]+$/.test(temp_weight[3])) {
 
       document.querySelector("#showdata").innerHTML = `
