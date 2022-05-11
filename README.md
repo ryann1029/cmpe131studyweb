@@ -2,7 +2,7 @@
 
 Basic web app built using Flask and Bootstrap.
 
-Bootstrap Theme used- Flatly from https://bootswatch.com/
+Bootstrap for NavBar used at https://getbootstrap.com/docs/4.0/components/navbar/
 
 ## Dependencies
 ```
@@ -16,6 +16,7 @@ You also need to install the wkhtmltopdf binaries found here: https://wkhtmltopd
 ```
 In Visual Studios...
 git clone https://github.com/vastmine1029/cmpe131studyweb.git
+
 Run
 ```
 
