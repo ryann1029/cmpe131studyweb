@@ -14,10 +14,9 @@ You also need to install the wkhtmltopdf binaries found here: https://wkhtmltopd
 
 ## To run the app
 ```
-git clone git@github.com: vastmine1029/cmpe131studyweb.git
-cd Milestone-2-CMPE-131
-install the dependencies using the commands above
-python run.py
+In Visual Studios...
+git clone https://github.com/vastmine1029/cmpe131studyweb.git
+Run
 ```
 
 ## To view the app
