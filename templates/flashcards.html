@@ -20,9 +20,9 @@
         <table class="outer-border-remove" style="width: 100%" style="text-align: center">
             <tbody>
                 <tr>
-                    <td style="text-align: center; border-right: 1px solid white;">
+                    <!-- <td style="text-align: center; border-right: 1px solid white;">
                         <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center; font-size: 16pt;">ID</div>
-                    </td>
+                    </td> -->
                     <td style="width: 97%; text-align: center">
                         <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center; font-size: 16pt;">Flashcards</div>
                     </td>
@@ -35,16 +35,30 @@
             {% for item in values %}
                 {% if item and item.user_id == id %}
                     <tr>
-                        <td style="border-right: 1px solid white;">
+                        <!-- <td style="border-right: 1px solid white;">
                             <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center;">{{item.id}}</div>
-                        </td>
+                        </td> -->
                         <td style="width: 97%;" id="slot">
                             <details id=flash-{{item.id}}>
                                 <summary>
                                 {{item.key}} <span class="icon">🔺</span>
                                 </summary>
+
                                 <hr style="border-color: white"/>
-                                <p>{{item.value}}</p>
+
+                                <table class="outer-border-remove" style="width: 100%">
+                                    <tr>
+                                        <td>
+                                            <span>{{item.value}}</span>
+                                        </td>
+                                        <td style="width: 10%;">
+                                            <form action="#" method="post">
+                                                <input class="delete-flashcard-input" style="display: none;" type="number" value={{item.id}} name="delete-flashcard" placeholder="Flashcard ID"/>
+                                                <button class="btn btn-danger my-2 my-sm-0" type="submit">Delete Flashcard</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
                             </details>
                         </td>
                     </tr>
@@ -52,15 +66,15 @@
             {% endfor %}
         </table>
     </center>
-    <a class="btn btn-outline-success my-2 my-sm-0" href="add-flashcard">Add Flashcard</button></a>
-    <input type="button" value="Expand All" class="btn btn-outline-success my-2 my-sm-0" onclick="ExpandAll()"/></td>
-    <input type="button" value="Collapse All" class="btn btn-outline-success my-2 my-sm-0" onclick="CollapseAll()"/></td>
+    <a class="btn btn-success my-2 my-sm-0" href="add-flashcard">Add Flashcard</button></a>
+    <input type="button" value="Expand All" class="btn btn-success my-2 my-sm-0" onclick="ExpandAll()"/></td>
+    <input type="button" value="Collapse All" class="btn btn-success my-2 my-sm-0" onclick="CollapseAll()"/></td>
     
 
-    <form action="#" method="post" style="position: relative; float: right;">
+    <!-- <form action="#" method="post" style="position: relative; float: right;">
         <input class="delete-flashcard-input" type="number" name="delete-flashcard" placeholder="Flashcard ID"/>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Delete Flashcard</button>
-    </form>
+        <button class="btn btn-success my-2 my-sm-0" type="submit">Delete Flashcard</button>
+    </form> -->
 
     <script src="static\js\flashcard.js"></script>
 </body>
