@@ -29,10 +29,11 @@ html, html * {
 
 body {
     background: url("https://images.pexels.com/photos/1036808/pexels-photo-1036808.jpeg");
-    background-position: fixed;
+    position: sticky;
     background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;
+	background-attachment: fixed;
 }
 
 
