@@ -28,8 +28,8 @@
                 
                 <tfoot id="buttonChoices">
                     <td>
-                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable1')"/>
-                    <input type="button" value="+ Add Row" onclick="addRow('dataTable1')" id="row"/>
+                    <input class="btn btn-danger" type="button" value="- Delete Row" onclick="deleteRow('dataTable1')"/>
+                    <input class="btn btn-success" type="button" value="+ Add Row" onclick="addRow('dataTable1')" id="row"/>
                     </td>
                 </tfoot>
             <!-- </tbody> -->
@@ -53,8 +53,8 @@
                 
                 <tfoot id="buttonChoices">
                     <td>
-                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable2')"/>
-                    <input type="button" value="+ Add Row" onclick="addRow('dataTable2')" id="row"/>
+                    <input class="btn btn-danger" type="button" value="- Delete Row" onclick="deleteRow('dataTable2')"/>
+                    <input class="btn btn-success" type="button" value="+ Add Row" onclick="addRow('dataTable2')" id="row"/>
                     </td>
                 </tfoot>
             <!-- </tbody> -->
@@ -78,8 +78,8 @@
                 
                 <tfoot id="buttonChoices">
                     <td>
-                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable3')"/>
-                    <input type="button" value="+ Add Row" onclick="addRow('dataTable3')" id="row"/>
+                    <input class="btn btn-danger" type="button" value="- Delete Row" onclick="deleteRow('dataTable3')"/>
+                    <input class="btn btn-success" type="button" value="+ Add Row" onclick="addRow('dataTable3')" id="row"/>
                     </td>
                 </tfoot>
             <!-- </tbody> -->
@@ -103,13 +103,13 @@
                 
                 <tfoot id="buttonChoices">
                     <td>
-                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable4')"/>
-                    <input type="button" value="+ Add Row" onclick="addRow('dataTable4')" id="row"/>
+                    <input class="btn btn-danger" type="button" value="- Delete Row" onclick="deleteRow('dataTable4')"/>
+                    <input class="btn btn-success" type="button" value="+ Add Row" onclick="addRow('dataTable4')" id="row"/>
                     </td>
                 </tfoot>
             <!-- </tbody> -->
         </table>
-
+        <br clear="all"/>
         <table id="dataTable5" border="1" style="float: left;">
             <!-- <thead> -->
                 <tr>
@@ -128,8 +128,8 @@
                 
                 <tfoot id="buttonChoices">
                     <td>
-                    <input type="button" value="- Delete Row" onclick="deleteRow('dataTable5')"/>
-                    <input type="button" value="+ Add Row" onclick="addRow('dataTable5')" id="row"/>
+                    <input class="btn btn-danger" type="button" value="- Delete Row" onclick="deleteRow('dataTable5')"/>
+                    <input class="btn btn-success" type="button" value="+ Add Row" onclick="addRow('dataTable5')" id="row"/>
                     </td>
                 </tfoot>
             <!-- </tbody> -->
@@ -138,11 +138,14 @@
     <br clear="all"/>
     <!-- <input type="button" value="+ Add Column" id="addColumn" /> -->
         <div style="position: relative; float: right;">
-        <input type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
+        <input class="btn btn-primary" type="button" value="Show Percentage" class="form-button" onclick="calculate()"/></td>
     </div> 
 
     <div class="form-group showdata">
-        <span>Results: <p id="showdata"></p></span>
+        <span>
+            <b>Results: </b>
+            <p id="showdata"></p>
+        </span>
     </div>
 
     <script src="static\js\calculator.js"></script>
