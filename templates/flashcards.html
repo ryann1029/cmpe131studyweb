@@ -54,7 +54,7 @@
                                         <td style="width: 10%;">
                                             <form action="#" method="post">
                                                 <input class="delete-flashcard-input" style="display: none;" type="number" value={{item.id}} name="delete-flashcard" placeholder="Flashcard ID"/>
-                                                <button class="btn btn-danger my-2 my-sm-0" type="submit">Delete Flashcard</button>
+                                                <button class="btn btn-danger" type="submit">Delete Flashcard</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -66,14 +66,14 @@
             {% endfor %}
         </table>
     </center>
-    <a class="btn btn-success my-2 my-sm-0" href="add-flashcard">Add Flashcard</button></a>
-    <input type="button" value="Expand All" class="btn btn-success my-2 my-sm-0" onclick="ExpandAll()"/></td>
-    <input type="button" value="Collapse All" class="btn btn-success my-2 my-sm-0" onclick="CollapseAll()"/></td>
+    <a class="btn btn-success" href="add-flashcard">Add Flashcard</button></a>
+    <input type="button" value="Expand All" class="btn btn-success" onclick="ExpandAll()"/></td>
+    <input type="button" value="Collapse All" class="btn btn-success" onclick="CollapseAll()"/></td>
     
 
     <!-- <form action="#" method="post" style="position: relative; float: right;">
         <input class="delete-flashcard-input" type="number" name="delete-flashcard" placeholder="Flashcard ID"/>
-        <button class="btn btn-success my-2 my-sm-0" type="submit">Delete Flashcard</button>
+        <button class="btn btn-success" type="submit">Delete Flashcard</button>
     </form> -->
 
     <script src="static\js\flashcard.js"></script>
