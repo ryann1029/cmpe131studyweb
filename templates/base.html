@@ -68,7 +68,11 @@
                     <div class="justify-content-between">
                         <form class="form-inline" action="logout">
                             <span style="color: white; margin-right: 1em;">Hello, {{user if user else "user"}}!</span>
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{"Log Out" if user else "Log In"}}</button>
+                            {% if user %}
+                            <button class="btn btn-danger my-2 my-sm-0" type="submit">Log Out</button>
+                            {% else %}
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Log In</button>
+                            {% endif %}
                         </form>
                     </div>
                 </nav>
