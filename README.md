@@ -4,6 +4,10 @@ Basic web app built using Flask and Bootstrap.
 
 Bootstrap for NavBar used at https://getbootstrap.com/docs/4.0/components/navbar/
 
+## Download Python
+Download the latest version of Python.
+https://www.python.org/downloads/
+
 ## Dependencies
 ```
 pip install flask
