@@ -420,14 +420,14 @@ def page():
 
 # Run Program
 if __name__ == "__main__":
-    db.create_all() # creates database - must be before app.run()
-    found_email = Users.query.filter_by(email="sysop@sus.com").first()
-    if found_email:
-        pass
-    else:
-        identification = Users("Sysop", "sysop@sus.com", "sysopalv", None)
-        db.session.add(identification)
-        db.session.commit()
-    
+    with app.app_context():
+        db.create_all() # creates database - must be before app.run()
+        found_email = Users.query.filter_by(email="sysop@sus.com").first()
+        if found_email:
+            pass
+        else:
+            identification = Users("Sysop", "sysop@sus.com", "sysopalv", None)
+            db.session.add(identification)
+            db.session.commit()
 
-    app.run(debug = True) # runs program. Every time you save any file, the new version will run.
+        app.run(debug = True) # runs program. Every time you save any file, the new version will run.
