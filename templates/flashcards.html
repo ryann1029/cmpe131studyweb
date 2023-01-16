@@ -32,6 +32,9 @@
         <hr style="border-bottom: 3px solid white; margin-top: 1em; margin-bottom: 1em;"/>
 
         <table class="outer-border-remove inner-border-remove-top-bottom" style="width: 100%; margin-bottom: 1em;">
+            {% if not values %}
+            <div style="border: 1px solid white; padding: 0.5em; background-color: #333; text-align: center; font-size: 14pt;">There are no flashcards. <a href="add-flashcard">Add one!</a></div>
+            {% else %}
             {% for item in values %}
                 {% if item and item.user_id == id %}
                     <tr>
@@ -64,6 +67,7 @@
                     </tr>
                 {% endif %}
             {% endfor %}
+            {% endif %}
         </table>
     </center>
     <a class="btn btn-success" href="add-flashcard">Add Flashcard</button></a>

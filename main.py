@@ -193,7 +193,7 @@ def login():
 
 # CHANGE PASSWORD PAGE
 @app.route("/change-password", methods=["POST", "GET"])
-def changePassword():
+def change_password():
     current_user = None
     if "email" in session:
         email = session["email"]
@@ -289,7 +289,7 @@ def user():
 
 # EDITING NOTES PAGE
 @app.route("/notes", methods=["POST", "GET"])
-def editingNotes():
+def editing_notes():
     current_user = None
     if "email" in session:
         email = session["email"]
@@ -340,13 +340,18 @@ def flashcards():
                 flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">Flashcard #") + f"{flash_id_request}" + Markup(" does not exist.</span>"))
                 return redirect(url_for("flashcards"))
         else:
-            return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
+            # if there is no flashcards for the current logged in user, then return nothing.
+            if Flashcards.query.filter(Flashcards.user_id==current_id).count() < 1:
+                return render_template("flashcards.html", user=current_user, id=current_id, values=None)
+            # Otherwise, return the list of flashcards associated to the current user logged in
+            else:
+                return render_template("flashcards.html", user=current_user, id=current_id, values=Flashcards.query.all())
     
     flash(Markup("<img style=\"vertical-align: middle;\" src=\"static\pictures\Exclamation Point Icon.png\" height=\"18px\" width=\"18px\"/> <span style=\"color: red;\">You need to be logged in to use the Flashcard feature.</span>"))
     return redirect(url_for("login"))
 
 @app.route("/add-flashcard", methods=["POST", "GET"])
-def addFlashcard():
+def add_flashcard():
     current_user = None
     if "email" in session:
         email = session["email"]
@@ -401,7 +406,6 @@ def ryan():
         current_user = current_email.user
         # flashcard_all = Flashcards.query.filter(Flashcards.user_id == current_id).all()
         # print(Flashcards.user_id)
-
     return render_template("ryan_test.html", user=current_user)
 
 
@@ -423,9 +427,7 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all() # creates database - must be before app.run()
         found_email = Users.query.filter_by(email="sysop@sus.com").first()
-        if found_email:
-            pass
-        else:
+        if not found_email:
             identification = Users("Sysop", "sysop@sus.com", "sysopalv", None)
             db.session.add(identification)
             db.session.commit()
