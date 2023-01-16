@@ -1,28 +1,28 @@
 # CMPE-131-Project
 
-Basic web app built using Flask and Bootstrap.
+Basic web app built with ***[Flask](https://flask.palletsprojects.com)*** and ***[Bootstrap](https://getbootstrap.com)*** using **HyperText Markup Language (HTML)**, **Cascading Style Sheets (CSS)**, **JavaScript (JS)** languages.
 
-Bootstrap for NavBar used at https://getbootstrap.com/docs/4.0/components/navbar/
+*Bootstrap for NavBar used at https://getbootstrap.com/docs/4.0/components/navbar*
 
 ## Download Python
-Download the latest version of Python.
-https://www.python.org/downloads/
+**Download the latest version of Python.**
+> https://www.python.org/downloads/
+
+*Highly recommended to add Python to environment variables ("Add to PATH")*
 
 ## Dependencies
+Install the following packages:
 ```
 pip install flask
 pip install flask-sqlalchemy
 ```
 
-You also need to install the wkhtmltopdf binaries found here: https://wkhtmltopdf.org/downloads.html
-
 ## To run the app
+In any Integrated Developmet Environment (e.g., Visual Studios Code, Xcode, etc.), git the repository.
 ```
-In Visual Studios...
 git clone https://github.com/vastmine1029/cmpe131studyweb.git
-
-Run
 ```
 
 ## To view the app
-The website is located in your local host: http://localhost:5000/
+1. Run `main.py`.
+2. Go on any browser and type your local host in the URL input: http://localhost:5000/
